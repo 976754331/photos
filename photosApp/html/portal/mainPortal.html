@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/jquery-1.10.2.min.js"></script>
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			#scrollDiv a {
+				margin: 0.1rem;
+			}
+			
+			#scrollDiv button {
+				height: 3rem;
+				font-size: 1.2rem;
+				padding-bottom: 1.3rem;
+			}
+			
+			#zhuanti a {
+				padding: 0.4rem;
+				margin: 0.25rem;
+			}
+			
+			.content_article div {
+				margin: 1rem;
+			}
+			#mainUl li{
+				margin:0.6rem 0;
+				background-image: url(../../images/zhiwu/zw001004.jpg);
+			}
+		</style>
+		<script src="../../js/loadMenu.js"></script>
+	</head>
+
+	<body class="mui-scroll-wrapper">
+
+		<div class="mui-slider">
+			<h3 align="center">精美图片展示</h3>
+			<!-- 图片轮播 -->
+			<div class="mui-slider-group">
+				
+				<div class="mui-slider-item">
+					<a href="#"><img src="../../images/fengjing/fj001001.png" /> </a>
+				</div>
+				<div class="mui-slider-item">
+					<a href="#"><img src="../../images/fengjing/fj001002.png" /> </a>
+				</div>
+				<div class="mui-slider-item">
+					<a href="#"><img src="../../images/fengjing/fj001003.png" /> </a>
+				</div>
+				<div class="mui-slider-item">
+					<a href="#"><img src="../../images/fengjing/fj001004.png" /> </a>
+				</div>
+				<div class="mui-slider-item">
+					<a href="#"><img src="../../images/fengjing/fj001005.png" /> </a>
+				</div>
+			</div>
+		</div>
+		<div style="margin-top: 3rem;" >
+			<div style="margin-bottom: 1rem;">
+				<h4> 分类展示区</h4>
+			</div>
+			<div >
+				<ul class="mui-table-view" id="mainUl">
+					<!-- 
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right">人物</a>
+						<div class="mui-collapse-content">
+							<div class="mui-scroll-wrapper  mui-segmented-control mui-slider-indicator mui-segmented-control-inverted" >
+								<div class="mui-scroll" id="scrollDiv">
+									<a id="btn101" class="mui-control-item"><button class="mui-button-row">男星</button></a>
+									<a id="btn102" class="mui-control-item"><button class="mui-btn-green">女星</button></a>
+									<a id="btn103" class="mui-control-item"><button class="mui-btn-blue">头像</button></a>
+									<a id="btn104" class="mui-control-item"><button class="mui-btn-danger">风景</button></a>
+									<a id="btn105" class="mui-control-item"><button class="mui-btn-grey">植物</button></a>
+									<a id="btn106" class="mui-control-item"><button class="mui-btn-yellow">山水</button></a>
+								</div>
+							</div>
+
+						</div>
+					</li>
+					-->
+				</ul>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			mui.init();
+			mui('.mui-scroll-wrapper').scroll();
+			mui.ready(function() {
+				loadMenu();
+			})
+		</script>
+	</body>
+
+</html>

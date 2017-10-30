@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style>
+			
+			
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content" align="center" style="margin-top:5rem;margin-bottom: 2rem;">
+			<span style="color: red;font-size: 2.62rem;"><b>相册</b></span>
+		</div>
+		<br />
+		<!--
+        	作者：976754331@qq.com
+        	时间：2017-09-30
+        	描述：
+        -->
+		<div style="margin:2rem 2rem">
+			<span style="float:right"><img src="images/fengjing/tx001007.jpg" style="height: 5rem;width: 4.8rem;"/></span>
+			<span style="margin: 0.3rem 0rem;font-size:1.21rem;display: block;"><b>相册：人生的脚印，记录我的生活轨迹！！！</b></span>
+
+		</div>
+		
+		<div id="inputLists" style="margin-top: 6rem;">
+			<ul style="list-style-type: none;width:90%">
+				<li style="margin-bottom: 1.2rem;">
+					<span style="color: blue;font-size: 1.62rem;"><b>请输入打开密码:</b></span>
+				</li>
+				<li>
+					<input id="thirdInput" type="text" class="mui-input-password" placeholder="密码" />
+				</li>
+			</ul>
+		</div>
+		<div align="center">
+			<button id="affirmBtn" class="mui-btn-success" type="button" style="width: 80%;height: 2.6rem;">确认</button>
+		</div>
+
+		<script>
+			mui.init();
+			var affirmBtn = document.getElementById("affirmBtn");
+			var thirdInput = document.getElementById("thirdInput");
+			
+			affirmBtn.addEventListener("tap", function(){opneNew("html/portal/mainPortal.html")});
+			
+			function opneNew(url) {
+				if(thirdInput.value === "WEI2010112122"){
+					mui.openWindow(url);
+				}else{
+					mui.alert("密码错误","提示",null)
+				}				
+			}
+			
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,8 @@
+{
+	"status": "SUCCESS",
+	"infoMSG": "",
+	"data":{"menu":["person","beautiful"],
+	"person":["../person/yunyun.html","../person/my.html"],
+	"beautiful":["shanshui","fengjing"]
+	}
+}
