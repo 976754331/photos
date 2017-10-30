@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd
+      http://www.springframework.org/schema/mvc 
+      http://www.springframework.org/schema/mvc/spring-mvc.xsd
+      http://www.springframework.org/schema/aop
+      http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+      http://www.springframework.org/schema/tx
+      http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<!-- 引入jdbc配置文件 -->
+	<context:property-placeholder location="classpath:conf/jdbc.properties" />
+
+	<!-- 扫描文件（自动将servicec层注入） -->
+	<context:component-scan base-package="com.hoperun.model.*,com.hoperun.service.*" >
+		
+	</context:component-scan>
+	 <!-- 通过扫描的模式，扫描目录在com.mapper目录 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.hoperun.mapper" />
+	</bean>
+	
+	<!-- 资源下载 -->
+	<mvc:annotation-driven />
+	<mvc:resources location="/downloads/" mapping="/downloads/**" />
+
+	<context:component-scan base-package="com.hoperun.service.*" use-default-filters="false" >
+	        <context:include-filter type="annotation"
+	            expression="org.springframework.stereotype.Service" />
+	</context:component-scan>
+		<!-- 使用annotation注解方式配置事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager"  />
+   
+</beans>

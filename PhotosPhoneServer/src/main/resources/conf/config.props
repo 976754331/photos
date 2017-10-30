@@ -1,0 +1,24 @@
+[UserExp]
+fromLastMonth=false
+defaultMonthToCount=5
+login=50
+send_signal_data=200
+
+[RSSI]
+pageSize=300
+uploadLimit=50
+
+[User]
+# 用户过期时间（单位：分钟）
+#timeout=5
+#密码有效期(单位：天)
+#dayTimeout=30
+#账号锁定时长(单位：分钟)
+#lockTimeout=1
+#头像上传地址
+imgUrl=E://eclipse//workspace//.metadata//.plugins//org.eclipse.wst.server.core//tmp1//wtpwebapps//cmam//userfiles//1//images//photo//
+imgUrlDb=/cmam/userfiles/1/images/photo/
+
+
+[db]
+woc=hqB5JKM8ICH5zMxwN5rQZRvrY=
