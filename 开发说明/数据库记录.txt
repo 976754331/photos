@@ -1,0 +1,23 @@
+1.新建数据库： photos 
+
+2.创建用户表tb_user
+DROP TABLE IF EXISTS `tb_user`;
+CREATE TABLE `tb_user` (
+  `user_id` varchar(50) NOT NULL COMMENT '主键id',
+  `name` varchar(50) DEFAULT NULL COMMENT '姓名',
+  `sex` varchar(50) DEFAULT NULL COMMENT '性别',
+  `create_date` varchar(50) DEFAULT NULL COMMENT '创建时间',
+  `phone` varchar(50) DEFAULT NULL COMMENT '电话',
+  `login_name` varchar(75) DEFAULT NULL COMMENT '登录名',
+  `password` varchar(75) DEFAULT NULL COMMENT '登录密码',
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户登录信息表';
+
+-- ----------------------------
+-- Records of tb_user
+-- ----------------------------
+INSERT INTO `tb_user` VALUES ('1', 'root', 'm', '2017-10-31', null, 'root', '123456');
+
+3.创建pic类型表tb_pic_type
+
+

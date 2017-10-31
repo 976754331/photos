@@ -189,5 +189,48 @@
 				}
 			}
 		}
+	},
+	"dependencies": {
+		"pages": {
+			"index.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"images/fengjing/tx001007.jpg"
+				],
+				"refer": [],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"images/my/my001001.jpg",
+				"js/json/timeAddr.json",
+				"images/fengjing/fj001003.png",
+				"images/fengjing/fj001001.png",
+				"js/loadImage.js",
+				"images/fengjing/fj001002.png",
+				"js/json/loadMenu.json",
+				"images/my/my001002.jpg",
+				"fonts/mui.ttf",
+				"html/person/my.html",
+				"html/portal/mainPortal.html",
+				"images/fengjing/fj001005.png",
+				"css/mui.css",
+				"js/loadMenu.js",
+				"images/yunyun/yy001001.jpg",
+				"html/person/yunyun.html",
+				"js/json/person.json",
+				"images/yunyun/yy001002.jpg",
+				"js/json/loadUrl.json",
+				"js/createMenu.js",
+				"images/fengjing/fj001004.png",
+				"js/jquery-1.10.2.min.js",
+				"js/mui.js",
+				"images/my/my001003.jpg",
+				"images/yunyun/yy001003.jpg",
+				"js/setTimeAndAddress.js"
+			]
+		}
 	}
 }

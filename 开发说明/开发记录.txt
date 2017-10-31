@@ -1,0 +1,5 @@
+我的接口：
+登录接口：验证账号密码
+http://localhost:8080/photos/user/login.do?loginName=root&password=123456
+{"rtn_code":0,"data":{"msg":"用户名错误","flag":"0"}}
+{"rtn_code":0,"data":{"msg":"密码正确","flag":"1"}}

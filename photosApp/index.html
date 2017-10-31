@@ -6,6 +6,8 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title></title>
 		<script src="js/mui.min.js"></script>
+		<script src="js/jquery-1.10.2.min.js"></script>
+		<script src="js/common.js"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<style>
 			
@@ -31,31 +33,47 @@
 		
 		<div id="inputLists" style="margin-top: 6rem;">
 			<ul style="list-style-type: none;width:90%">
-				<li style="margin-bottom: 1.2rem;">
-					<span style="color: blue;font-size: 1.62rem;"><b>请输入打开密码:</b></span>
+				<li>
+					<input id="accountInput" type="text" class="mui-input" placeholder="账号" />
 				</li>
 				<li>
-					<input id="thirdInput" type="text" class="mui-input-password" placeholder="密码" />
+					<input id="pwdInput" type="text" class="mui-input-password" placeholder="密码" />
 				</li>
 			</ul>
 		</div>
 		<div align="center">
-			<button id="affirmBtn" class="mui-btn-success" type="button" style="width: 80%;height: 2.6rem;">确认</button>
+			<button id="affirmBtn" class="mui-btn-success" type="button" style="width: 80%;height: 2.6rem;">登录</button>
 		</div>
 
 		<script>
+			
 			mui.init();
 			var affirmBtn = document.getElementById("affirmBtn");
-			var thirdInput = document.getElementById("thirdInput");
-			
+			var accountInput = document.getElementById("accountInput");
+			var pwdInput = document.getElementById("pwdInput");
 			affirmBtn.addEventListener("tap", function(){opneNew("html/portal/mainPortal.html")});
 			
 			function opneNew(url) {
-				if(thirdInput.value === "WEI2010112122"){
-					mui.openWindow(url);
-				}else{
-					mui.alert("密码错误","提示",null)
-				}				
+				var loginInfo = {
+					loginName: accountInput.value,
+					password: pwdInput.value
+				};
+				simpAjax(Url+"/user/login.do", loginInfo, function(result){
+					if (result.rtn_code == 0){ 
+						if(result.data.flag == "0"){
+							mui.toast(result.data.msg);
+							accountInput.value="";
+							pwdInput.value=""
+						}else{							
+							mui.openWindow(url);
+						}						
+					}else{
+						mui.toast(result.msg);
+						accountInput.value="";
+						pwdInput.value=""
+					}
+				})
+						
 			}
 			
 		</script>

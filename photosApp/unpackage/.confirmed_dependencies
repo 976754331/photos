@@ -1,1 +1,9 @@
-null
+{
+	"index.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"images/fengjing/tx001007.jpg"
+		]
+	}
+}
