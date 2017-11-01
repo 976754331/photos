@@ -23,7 +23,7 @@ function GetQueryString(key){
 
 //定义ajax URL
 //var Url = "http://10.50.30.201:9001/bookcity";
-var Url = "http://localhost:8080/photos";
+var Url = "http://localhost:8080/bookcity";
 //var Url = "http://10.50.30.201:8080/bookcity";
 
 //封装通用AJAX方法

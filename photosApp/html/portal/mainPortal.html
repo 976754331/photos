@@ -5,8 +5,9 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title></title>
-		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/mui.js"></script>
 		<script src="../../js/jquery-1.10.2.min.js"></script>
+		<script src="../../js/common.js"></script>
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<style>
 			* {
@@ -32,8 +33,9 @@
 			.content_article div {
 				margin: 1rem;
 			}
-			#mainUl li{
-				margin:0.6rem 0;
+			
+			#mainUl li {
+				margin: 0.6rem 0;
 				background-image: url(../../images/zhiwu/zw001004.jpg);
 			}
 		</style>
@@ -46,7 +48,7 @@
 			<h3 align="center">精美图片展示</h3>
 			<!-- 图片轮播 -->
 			<div class="mui-slider-group">
-				
+
 				<div class="mui-slider-item">
 					<a href="#"><img src="../../images/fengjing/fj001001.png" /> </a>
 				</div>
@@ -64,11 +66,11 @@
 				</div>
 			</div>
 		</div>
-		<div style="margin-top: 3rem;" >
+		<div style="margin-top: 3rem;">
 			<div style="margin-bottom: 1rem;">
 				<h4> 分类展示区</h4>
 			</div>
-			<div >
+			<div>
 				<ul class="mui-table-view" id="mainUl">
 					<!-- 
 					<li class="mui-table-view-cell mui-collapse">
@@ -94,10 +96,18 @@
 
 		<script type="text/javascript">
 			mui.init();
-			mui('.mui-scroll-wrapper').scroll();
+			
 			mui.ready(function() {
 				loadMenu();
+				
+				//加载二级菜单
+				mui('.mui-table-view').on('tap', '.mui-table-view-cell', function() {
+	   				 var dataid = $(this).attr("data-id");
+	   				 var menuDiv = $(this).children().children().children();
+	   				 loadSecondMenu(dataid,menuDiv);
+				})
 			})
+			mui('.mui-scroll-wrapper').scroll();
 		</script>
 	</body>
 
