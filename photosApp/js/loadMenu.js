@@ -12,27 +12,21 @@ function loadSecondMenu(dataid,menuDiv) {
 			var menu = result.data;			
 			for(var i = 0; i < menu.length; i++) {
 				var classBtn = classArr[parseInt(Math.random() * 6 + 1)];
-				btnHtml = '<a data-id='+menu[i].type_id+' class="mui-control-item"><button class=' + classBtn + '>'+menu[i].type_name+'</button></a>';
+				btnHtml = '<li data-id='+menu[i].type_id+' class="mui-control-item"><button class=' + classBtn + '>'+menu[i].type_name+'</button></li>';
 				menuDiv.append(btnHtml);
 				btnHtml = "";
 			}
+			
+			//加载图片
+			mui('.mui-scroll').on('tap', 'button', function(e) {
+				e.stopPropagation();
+				console.log("test");
+			})
 		} else {
 			mui.toast(result.msg);
 		}
 	})
 }
-/*
-
-for(var i = 0; i < menu.length; i++) {
-	var btn = data.data[menu[i]];
-	for(var j = 0; j < btn.length; j++) {
-		var classBtn = classArr[parseInt(Math.random() * 6 + 1)];
-		aHtml += '<a id =' + 666 + i + 666 + j + '   class="mui-control-item"><button class=' + classBtn + '>' + btn[j] + '</button></a>'
-		$("#" + i + "888").append(aHtml);
-		aHtml = "";
-	}
-}
-*/
 
 //加载主分类菜单
 function loadMenu() {
@@ -46,9 +40,9 @@ function loadMenu() {
 				liHtml += '<a class="mui-navigate-right">' + menu[i].type_name + '</a>'
 				liHtml += '<div class="mui-collapse-content">'
 				liHtml += '<div class="mui-scroll-wrapper  mui-segmented-control mui-slider-indicator mui-segmented-control-inverted" >'
-				liHtml += '<div class="mui-scroll" >'
+				liHtml += '<ul class="mui-scroll" >'
 
-				liHtml += '</div>'
+				liHtml += '</ul>'
 				liHtml += '</div>'
 				liHtml += '</div>'
 				liHtml += '</li>'
@@ -61,36 +55,7 @@ function loadMenu() {
 	})
 
 	/*
-	$.getJSON("../../js/json/loadMenu.json", function(data) {
-		var menu = data.data.menu;
-		var liHtml = "";
-		var aHtml = "";
-		for(var i = 0; i < menu.length; i++) {
-			liHtml += '<li class="mui-table-view-cell mui-collapse">'
-			liHtml += '<a class="mui-navigate-right">' + menu[i] + '</a>'
-			liHtml += '<div class="mui-collapse-content">'
-			liHtml += '<div class="mui-scroll-wrapper  mui-segmented-control mui-slider-indicator mui-segmented-control-inverted" >'
-			liHtml += '<div class="mui-scroll" id=' + i + 888 + '>'
-
-			liHtml += '</div>'
-			liHtml += '</div>'
-			liHtml += '</div>'
-			liHtml += '</li>'
-			$("#mainUl").append(liHtml);
-			liHtml = "";
-
-		}
-		var classArr = ["mui-button-row","mui-btn-green","mui-btn-blue","mui-btn-danger","mui-btn-grey","mui-btn-yellow",];
-		for(var i = 0; i < menu.length; i++) {
-			var btn = data.data[menu[i]];
-			for(var j = 0; j < btn.length; j++) {
-				var classBtn = classArr[parseInt(Math.random()*6+1)];
-				aHtml += '<a id =' + 666 + i + 666 + j + '   class="mui-control-item"><button class='+classBtn+'>' + btn[j] + '</button></a>'
-				$("#" + i + "888").append(aHtml);
-				aHtml = "";
-			}
-		}
-	})
+	
 	$.getJSON("../../js/json/loadUrl.json", function(data) {
 
 		mui(".mui-scroll").on('tap', '.mui-control-item', function() {

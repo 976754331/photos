@@ -19,5 +19,13 @@ CREATE TABLE `tb_user` (
 INSERT INTO `tb_user` VALUES ('1', 'root', 'm', '2017-10-31', null, 'root', '123456');
 
 3.创建pic类型表tb_pic_type
+DROP TABLE IF EXISTS `tb_pic_type`;
+CREATE TABLE `tb_pic_type` (
+  `type_id` varchar(50) NOT NULL COMMENT '主键id',
+  `type_name` varchar(50) DEFAULT NULL COMMENT '分类名',
+  `parent_id` varchar(50) DEFAULT NULL COMMENT '上级类型id',
+  `type_comment` varchar(100) DEFAULT NULL COMMENT '分类说明',
+  PRIMARY KEY (`type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='图片类型表';
 
 

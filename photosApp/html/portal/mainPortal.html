@@ -72,19 +72,24 @@
 			</div>
 			<div>
 				<ul class="mui-table-view" id="mainUl">
-					<!-- 
+					
+                    <!--
 					<li class="mui-table-view-cell mui-collapse">
 						<a class="mui-navigate-right">人物</a>
 						<div class="mui-collapse-content">
 							<div class="mui-scroll-wrapper  mui-segmented-control mui-slider-indicator mui-segmented-control-inverted" >
-								<div class="mui-scroll" id="scrollDiv">
-									<a id="btn101" class="mui-control-item"><button class="mui-button-row">男星</button></a>
-									<a id="btn102" class="mui-control-item"><button class="mui-btn-green">女星</button></a>
-									<a id="btn103" class="mui-control-item"><button class="mui-btn-blue">头像</button></a>
-									<a id="btn104" class="mui-control-item"><button class="mui-btn-danger">风景</button></a>
-									<a id="btn105" class="mui-control-item"><button class="mui-btn-grey">植物</button></a>
-									<a id="btn106" class="mui-control-item"><button class="mui-btn-yellow">山水</button></a>
-								</div>
+								
+                                	
+                                
+								<ul class="mui-scroll" id="scrollDiv">
+									<li id="btn101" class="mui-control-item"><button class="mui-button-row">男星</button></li>
+									<li id="btn102" class="mui-control-item"><button class="mui-btn-green">女星</button></li>
+									<li id="btn103" class="mui-control-item"><button class="mui-btn-blue">头像</button></li>
+									<li id="btn104" class="mui-control-item"><button class="mui-btn-danger">风景</button></li>
+									<li id="btn105" class="mui-control-item"><button class="mui-btn-grey">植物</button></li>
+									<li id="btn106" class="mui-control-item"><button class="mui-btn-yellow">山水</button></li>
+								</ul>
+								
 							</div>
 
 						</div>
@@ -98,16 +103,21 @@
 			mui.init();
 			
 			mui.ready(function() {
+				//加载主菜单
 				loadMenu();
 				
 				//加载二级菜单
 				mui('.mui-table-view').on('tap', '.mui-table-view-cell', function() {
-	   				 var dataid = $(this).attr("data-id");
-	   				 var menuDiv = $(this).children().children().children();
-	   				 loadSecondMenu(dataid,menuDiv);
+	   				var dataid = $(this).attr("data-id");
+	   				var menuDiv = $(this).children().children().children();
+	   			    loadSecondMenu(dataid,menuDiv);
+	   			    mui('.mui-scroll-wrapper').scroll({
+	   			    	deceleration: 0.0009 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+	   			    });
 				})
+				
 			})
-			mui('.mui-scroll-wrapper').scroll();
+			
 		</script>
 	</body>
 

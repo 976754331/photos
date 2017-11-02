@@ -3,3 +3,25 @@
 http://localhost:8080/photos/user/login.do?loginName=root&password=123456
 {"rtn_code":0,"data":{"msg":"用户名错误","flag":"0"}}
 {"rtn_code":0,"data":{"msg":"密码正确","flag":"1"}}
+
+获取一级类型
+http://localhost:8080/photos/type/first.do
+{"rtn_code":0,"data":[{"type_name":"个人展示","type_id":"1"},{"type_name":"我的足迹","type_id":"2"}]}
+
+获取二级类型
+http://localhost:8080/photos/type/second.do?parentId=1
+{"rtn_code":0,"data":[{"type_name":"Peter","type_id":"101"},{"type_name":"Selinely","type_id":"102"}]}
+
+获取照片
+建表
+照片tb_pic pic_id,pic_name,attachment_id, shoot_date,shoot_person,addr,upload_date,desc,intro
+照片分类表tb_pic_type  pic_id, type_id
+附件表tb_attachment  attachment_id, pic_path, pic_name
+评论表tb_comment comment_id,user_id,pic_id,comment_date,content
+
+
+
+
+
+
+
