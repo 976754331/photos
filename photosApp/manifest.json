@@ -196,7 +196,9 @@
 				"resources": [
 					"js/mui.min.js",
 					"css/mui.min.css",
-					"images/fengjing/tx001007.jpg"
+					"images/fengjing/tx001007.jpg",
+					"js/common.js",
+					"js/jquery-1.10.2.min.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -225,7 +227,6 @@
 				"js/json/loadUrl.json",
 				"js/createMenu.js",
 				"images/fengjing/fj001004.png",
-				"js/jquery-1.10.2.min.js",
 				"js/mui.js",
 				"images/my/my001003.jpg",
 				"images/yunyun/yy001003.jpg",

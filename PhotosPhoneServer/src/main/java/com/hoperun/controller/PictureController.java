@@ -1,6 +1,8 @@
 package com.hoperun.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,44 +14,43 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hoperun.exception.ServiceException;
 import com.hoperun.model.vo.ReturnInfo;
-import com.hoperun.service.IUserService;
+import com.hoperun.service.IPictureService;
+import com.hoperun.service.ITypeService;
 
 /**
- * 用户登录及信息查询类
+ * 获取图片类型
  * @author Wang_wei
  *
  */
 @Controller
-@RequestMapping("/user")
-public class UserController{
+@RequestMapping("/picture")
+public class PictureController{
 	
 	@Autowired
-	private IUserService userService;
+	private IPictureService pictureService;
 	
 	/**
-	 * 根据登录名获取密码和userId
-	 * flag为1登录成功，flag为0登录成功
+	 * 根据二级类型获取图片列表
 	 * @param params
 	 * @return
 	 */
-	@RequestMapping(value = "login")
+	@RequestMapping(value = "list")
 	@ResponseBody
-	public ReturnInfo login(HttpServletRequest request, String loginName, String password) {
+	public ReturnInfo selectPicLists(HttpServletRequest request, String typeId) {
 		ReturnInfo rtn = new ReturnInfo();
+		List<Map<String,Object>> rtnList = new ArrayList<Map<String,Object>>();
 		Map<String,String> params = new HashMap<String, String>();
-		params.put("loginName", loginName);
-		params.put("password", password);
-		Map<String,Object> rtnMap = new HashMap<String, Object>();
+		params.put("typeId", typeId);
 		try {
-			rtnMap = userService.selectLogin(params);
+			rtnList = pictureService.selectPicLists(params);
 		} catch (ServiceException e) {
 			ReturnInfo errRtn = new ReturnInfo();
 			errRtn.setRtnCode(888);
 			errRtn.setMsg("sql异常，执行操作失败");
 		}
-		rtn.setData(rtnMap);
+		rtn.setData(rtnList);
 		return rtn;
 	}
-
+	
 	
 }

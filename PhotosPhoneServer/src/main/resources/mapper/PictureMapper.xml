@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hoperun.mapper.PictureMapper">
+  <!-- 根据二级类型获取图片列表 -->
+  <select id="selectPicLists" parameterType="map" resultType="map">
+    SELECT p.pic_id,p.pic_name,p.attachment_id,p.shoot_date,p.shoot_person,p.addr,p.desc,p.intro
+	from tb_pic p left join tb_types t on p.pic_id= t.pic_id 
+	where t.type_id = #{typeId}
+  </select>
+  
+</mapper>

@@ -6,19 +6,15 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hoperun.exception.ServiceException;
 import com.hoperun.model.vo.ReturnInfo;
-import com.hoperun.service.IFileService;
 import com.hoperun.service.ITypeService;
-import com.hoperun.service.IUserService;
 
 /**
  * 获取图片类型

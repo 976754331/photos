@@ -28,4 +28,9 @@ CREATE TABLE `tb_pic_type` (
   PRIMARY KEY (`type_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='图片类型表';
 
+建表
+照片tb_pic pic_id,pic_name,attachment_id, shoot_date,shoot_person,addr,upload_date,desc,intro
+照片分类表tb_pic_type  pic_id, type_id
+附件表tb_attachment  attachment_id, pic_path, pic_name
+评论表tb_comment comment_id,user_id,pic_id,comment_date,content
 

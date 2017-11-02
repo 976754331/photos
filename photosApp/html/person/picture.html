@@ -7,15 +7,16 @@
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../js/jquery-1.10.2.min.js"></script>
 		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<script src="../../js/common.js"></script>
+		<script src="../../js/loadMenu.js"></script>
 		<script src="../../js/loadImage.js"></script>
-		<script src="../../js/setTimeAndAddress.js"></script>
 	</head>
 
 	<body>
 		<!--header-->
 		<div class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-back  mui-pull-left"></a>
-			<h1 class="mui-title">帅帅的我</h1>
+			<h1 class="mui-title" id = "mainTitle"></h1>
 		</div>
 		<nav id="timeAddr" class="mui-bar mui-bar-tab" style="height:2rem;background-color: #CCCEEE;">
 		</nav>
@@ -34,8 +35,12 @@
 			mui.init();
 			mui('.mui-scroll-wrapper').scroll();
 			mui.ready(function() {
-				unloadImage("my","person");
-				setTimeAndAddress("person","my");
+				var href = decodeURI(location.href);
+				var typeId = href.split("?")[1];
+				var btnName = href.split("?")[2];
+				var mainTitle = document.getElementById("mainTitle");
+				mainTitle.textContent = btnName;
+				loadImage(typeId);
 			})
 		</script>
 	</body>

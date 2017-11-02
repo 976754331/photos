@@ -1,26 +1,38 @@
 //加载二级分类
-function loadSecondMenu(dataid,menuDiv) {
+function loadSecondMenu(dataid, menuDiv) {
 	var params = {
 		parentId: dataid
 	};
 	var classArr = ["mui-button-row", "mui-btn-green", "mui-btn-blue", "mui-btn-danger", "mui-btn-grey", "mui-btn-yellow", ];
-	
+
 	var btnHtml = "";
 	simpAjax(Url + "/type/second.do", params, function(result) {
 		if(result.rtn_code == 0) {
 			menuDiv.empty();
-			var menu = result.data;			
+			var menu = result.data;
 			for(var i = 0; i < menu.length; i++) {
 				var classBtn = classArr[parseInt(Math.random() * 6 + 1)];
-				btnHtml = '<li data-id='+menu[i].type_id+' class="mui-control-item"><button class=' + classBtn + '>'+menu[i].type_name+'</button></li>';
+				btnHtml = '<li data-id=' + menu[i].type_id + ' class="mui-control-item"><button class=' + classBtn + '>' + menu[i].type_name + '</button></li>';
 				menuDiv.append(btnHtml);
 				btnHtml = "";
 			}
-			
+
 			//加载图片
-			mui('.mui-scroll').on('tap', 'button', function(e) {
+			mui('.mui-scroll').on('tap', '.mui-control-item', function(e) {
 				e.stopPropagation();
-				console.log("test");
+				var typeId = $(this).attr("data-id");
+				var btnName = $(this).children().text();
+				mui.openWindow({
+					url:encodeURI('../person/picture.html?'+typeId+'?'+btnName),
+					id:'../person/picture.html',
+					extras:{
+						typeId:typeId,
+						btnName:btnName
+					}
+					
+				});
+				
+				//loadImage(typeId);				
 			})
 		} else {
 			mui.toast(result.msg);

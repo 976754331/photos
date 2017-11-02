@@ -3,7 +3,9 @@
 		"resources": [
 			"js/mui.min.js",
 			"css/mui.min.css",
-			"images/fengjing/tx001007.jpg"
+			"images/fengjing/tx001007.jpg",
+			"js/common.js",
+			"js/jquery-1.10.2.min.js"
 		]
 	}
 }
