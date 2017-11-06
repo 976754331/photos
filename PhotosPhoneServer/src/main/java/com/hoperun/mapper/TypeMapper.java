@@ -16,4 +16,17 @@ public interface TypeMapper{
 	   * @return
 	   */
 	 public List<Map<String, Object>> selectSecondType(Map<String, String> params);
+	 
+	  /**
+	   * 读取本地文件时插入新的文件夹分类
+	   * @return
+	   */
+	 public void insertDiskType(Map<String, String> params);
+	 
+	 /**
+	   * 读取本地文件时往分类与图片关联表中插入数据
+	   * @return
+	   */
+	 public void insertTypesFromDisk(Map<String, String> params);
+	 
 }

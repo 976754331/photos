@@ -6,4 +6,9 @@
     SELECT * from tb_attachment where attachment_id = #{attId}
   </select>
   
+  <!-- 往附件表中插入数据 -->
+  <insert id="inserPic" parameterType="map">
+  	insert into tb_attachment values(#{attId},#{picPath},#{picName})
+  </insert>
+  
 </mapper>

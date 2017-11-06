@@ -1,12 +1,20 @@
 package com.hoperun.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hoperun.exception.ServiceException;
+import com.hoperun.model.vo.ReturnInfo;
 import com.hoperun.service.IFileService;
 
 @Controller
@@ -24,8 +32,29 @@ public class FileController {
 	 * @param attId
 	 */
 	@RequestMapping(value="/downPic")
-	public void view(HttpServletResponse rsp,HttpServletRequest req, String attId){
+	public void downPic(HttpServletResponse rsp,HttpServletRequest req, String attId){
 		this.fileService.down(rsp, attId);
+	}
+	
+	/**
+	 * 往数据库中写入本地文件的数据
+	 * String testDir = "F:/test";
+	 * @throws Exception 
+	 */
+	@RequestMapping(value="/insertPic")
+	@ResponseBody
+	public ReturnInfo insertPic(HttpServletRequest req, String dirPath) throws Exception{
+		ReturnInfo rtn = new ReturnInfo();
+		List<Map<String,Object>> rtnList = new ArrayList<Map<String,Object>>();
+		try {
+			fileService.insertPic(dirPath);
+		} catch (Exception e) {
+			ReturnInfo errRtn = new ReturnInfo();
+			errRtn.setRtnCode(888);
+			errRtn.setMsg("sql异常，执行操作失败");
+		}
+		rtn.setData(rtnList);
+		return rtn;
 	}
 	
 }

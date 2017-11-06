@@ -10,4 +10,10 @@ public interface PictureMapper{
 	   * @return
 	   */
 	 public List<Map<String, Object>> selectPicLists(Map<String, String> params);
+	 
+	  /**
+	   * 从本地读入图片并插入到图片表中
+	   * @return
+	   */
+	 public void insertPicFromDisk(Map<String, String> params);
 }

@@ -18,6 +18,21 @@ http://localhost:8080/bookcity/picture/list.do?typeId=101
 "intro":"包括诗歌、散文、小说、剧本、寓言、童话等体裁，是文学的重要表现形式","attachment_id":"2","addr":"xian",
 "pic_name":"test","upload_date":"2017-11-1 11:11:02","desc":"文学是心灵世界的艺术"}]}
 
+加载图片接口
+http://127.0.0.1:8080/bookcity/file/downPic.do?attId=1
+
+往数据库中写入本地文件的数据
+http://127.0.0.1:8080/bookcity/file/insertPic.do?dirPath=F://test
+
+//问题
+1.如何读取图片并分类
+2.一级分类和二级分类
+建立读取页面，使用户自行设置分类
+
+
+
+
+
 
 
 

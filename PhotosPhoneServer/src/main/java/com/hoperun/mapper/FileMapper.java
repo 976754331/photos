@@ -9,4 +9,10 @@ public interface FileMapper{
 	   * @return
 	   */
 	 public Map<String, Object> selectPicAtt(Map<String, String> params);
+	 
+	 /**
+	   * 往附件表中插入数据
+	   * @return
+	   */
+	 public void inserPic(Map<String, String> params);
 }

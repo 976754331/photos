@@ -7,5 +7,10 @@
 	from tb_pic p left join tb_types t on p.pic_id= t.pic_id 
 	where t.type_id = #{typeId}
   </select>
+  <!-- 从本地读入图片并插入到图片表中 -->
+  <insert id="insertPicFromDisk" parameterType="map">
+  	insert into tb_pic (pic_id,pic_name,attachment_id,shoot_date,upload_date)
+  	values(#{picId},#{picName},#{attId},#{shootDate},#{uploadDate})
+  </insert>
   
 </mapper>
