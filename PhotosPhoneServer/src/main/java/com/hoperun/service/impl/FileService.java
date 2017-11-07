@@ -28,113 +28,141 @@ import com.hoperun.util.FileUtil;
 
 /**
  * 文件下载
+ * 
  * @author Hoperun
  *
  */
 @Service
 @Transactional
-public class FileService implements IFileService {	
-	
+public class FileService implements IFileService {
+
 	@Resource
 	private PictureMapper pictureMapper;
-	
+
 	@Resource
 	private FileMapper fileMapper;
-	
+
 	@Resource
 	private TypeMapper typeMapper;
-	
-	//暂定本地文件的一级分类id为5
+
+	// 暂定本地文件的一级分类id为5
 	private String DISK_TYPE_ID = "5";
-	
+
 	/**
 	 * 根据附件表的主键id加载附件图片
 	 */
 	@Override
-	public void down(HttpServletResponse rsp,String attId){
-		Map<String,String> params = new HashMap<String, String>();
+	public void down(HttpServletResponse rsp, String attId) {
+		Map<String, String> params = new HashMap<String, String>();
 		params.put("attId", attId);
-		//查询附件表的信息
-		Map<String,Object> map = fileMapper.selectPicAtt(params);
-		File file = new File(map.get("pic_path").toString()+map.get("pic_name").toString()) ;
-		if(!file.isFile()){
-			return ;
+		// 查询附件表的信息
+		Map<String, Object> map = fileMapper.selectPicAtt(params);
+		File file = new File(map.get("pic_path").toString()
+				+ map.get("pic_name").toString());
+		if (!file.isFile()) {
+			return;
 		}
-	    InputStream is = null;
-		OutputStream os= null;
+		InputStream is = null;
+		OutputStream os = null;
 		rsp.reset();
-		rsp.setHeader("Content-Disposition", "attachment;filename="+file.getName());  
-		
+		rsp.setHeader("Content-Disposition",
+				"attachment;filename=" + file.getName());
+
 		try {
 			is = new FileInputStream(file);
-			os= rsp.getOutputStream();
-			byte[] buf = new byte[1024<<4];
+			os = rsp.getOutputStream();
+			byte[] buf = new byte[1024 << 4];
 			int len = is.read(buf);
-			while(len!=-1){
+			while (len != -1) {
 				os.write(buf, 0, len);
-				len=is.read(buf);
+				len = is.read(buf);
 			}
 			os.flush();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			try {
 				is.close();
 				os.close();
 			} catch (IOException e) {
 			}
-		} 
-		 
-	}
+		}
 
+	}
 
 	/**
 	 * 往数据库中写入本地文件的数据
-	 * String testDir = "F:/test";
 	 */
 	@Override
-	public void insertPic(String dirPath) throws Exception{		
-		//首先读文件
+	public Map<String, String> insertPic(String dirPath, String userId) throws Exception {
+		Map<String, String> rtnMap = new HashMap<String, String>();
 		if (dirPath == null) {
-			return;
+			rtnMap.put("msg", "输入的路径为空");
+			return rtnMap;
 		}
+		dirPath = dirPath.replaceAll("\\\\", "/");
+		//查询用户插入本地磁盘数据记录表
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("userId", userId);
+		params.put("filePath", dirPath);
+		Map<String, Object> result = fileMapper.selectDiskRecord(params);
+		if(Integer.parseInt(result.get("count").toString()) == 1){ //已插入则不让操作并提示上次操作时间
+			rtnMap.put("msg", "你已导入此磁盘，上次导入时间为： "+ result.get("uplode_date"));
+			return rtnMap;
+		}else{//未插入调下面私有方法插入数据
+			//#{recordId},#{userId},#{filePath},#{uplodeDate}
+			
+			
+		}
+
+		
+		return null;
+	}
+
+	/**
+	 * 往数据库中写入本地文件的数据 String testDir = "F:/test";
+	 */
+	private Map<String, String> insertIntoPic(String dirPath) throws Exception {
+		// 首先读文件
+		Map<String, String> rtnMap = new HashMap<String, String>();
 		dirPath = dirPath.replaceAll("\\\\", "/");
 		File dir = new File(dirPath);
 		if (!dir.exists()) {
-			return;
+			rtnMap.put("msg", "输入的路径不存在");
+			return rtnMap;
 		}
-		
-		//见到文件夹就创建新的分类类型
+
+		// 见到文件夹就创建新的分类类型
 		Map<String, String> typeParams = new HashMap<String, String>();
-		//{typeId},#{typeName},#{parentId}
+		// {typeId},#{typeName},#{parentId}
 		String typeId = UUID.randomUUID().toString().replaceAll("-", "");
 		typeParams.put("typeId", typeId);
 		typeParams.put("typeName", dir.getName());
 		typeParams.put("parentId", DISK_TYPE_ID);
 		typeMapper.insertDiskType(typeParams);
-		
+
 		File[] files = dir.listFiles();
-		
+
 		for (int i = 0; i < files.length; i++) {
 			File file = files[i];
-			if (file.isDirectory()) {	 
-				//文件夹递归遍历
-				insertPic(dirPath+"/"+file.getName());				
-				
+			if (file.isDirectory()) {
+				// 文件夹递归遍历
+				insertIntoPic(dirPath + "/" + file.getName());
+
 			} else {
 				String attId = UUID.randomUUID().toString().replaceAll("-", "");
-				//往附件表中插数据
+				// 往附件表中插数据
 				Map<String, String> params = new HashMap<String, String>();
-				params.put("picPath", dirPath+"/");
+				params.put("picPath", dirPath + "/");
 				params.put("picName", file.getName());
 				params.put("attId", attId);
 				fileMapper.inserPic(params);
-				//往图片表中加数据
+				// 往图片表中加数据
 				Map<String, String> paramPic = new HashMap<String, String>();
-				//values(#{picId},#{picName},#{attId},#{shootDate},#{uploadDate})
+				// values(#{picId},#{picName},#{attId},#{shootDate},#{uploadDate})
 				String picId = UUID.randomUUID().toString().replaceAll("-", "");
 				DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				Long time =file.lastModified();
+				Long time = file.lastModified();
 				String shootDate = df.format(new Date(time));
 				String uploadDate = df.format(new Date());
 				paramPic.put("picId", picId);
@@ -144,15 +172,15 @@ public class FileService implements IFileService {
 				paramPic.put("uploadDate", uploadDate);
 				paramPic.put("typeId", typeId);
 				pictureMapper.insertPicFromDisk(paramPic);
-				
-				//往分类表中插入数据				
+
+				// 往分类表中插入数据
 				typeMapper.insertTypesFromDisk(paramPic);
-				
+
 			}
 
 		}
-		
+		rtnMap.put("msg", "ok");
+		return rtnMap;
 	}
-	
 
 }

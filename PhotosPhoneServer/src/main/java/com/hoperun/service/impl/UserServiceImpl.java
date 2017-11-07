@@ -41,7 +41,9 @@ public class UserServiceImpl  implements IUserService{
 		}
 		if(password.equals(inputPassword)){
 			rtnMap.put("flag", "1");
-			rtnMap.put("msg", "密码正确");	
+			rtnMap.put("msg", "密码正确");
+			rtnMap.put("userId", resultMap.get("user_id").toString());
+			rtnMap.put("name", resultMap.get("name").toString());
 			return rtnMap;
 		}else{
 			rtnMap.put("flag", "0");

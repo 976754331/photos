@@ -8,6 +8,7 @@
 		<script src="js/mui.min.js"></script>
 		<script src="js/jquery-1.10.2.min.js"></script>
 		<script src="js/common.js"></script>
+		<script src="js/login.js"></script>
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<style>
 			
@@ -52,29 +53,6 @@
 			var accountInput = document.getElementById("accountInput");
 			var pwdInput = document.getElementById("pwdInput");
 			affirmBtn.addEventListener("tap", function(){opneNew("html/portal/mainPortal.html")});
-			
-			function opneNew(url) {
-				var loginInfo = {
-					loginName: accountInput.value,
-					password: pwdInput.value
-				};
-				simpAjax(Url+"/user/login.do", loginInfo, function(result){
-					if (result.rtn_code == 0){ 
-						if(result.data.flag == "0"){
-							mui.toast(result.data.msg);
-							accountInput.value="";
-							pwdInput.value=""
-						}else{							
-							mui.openWindow(url);
-						}						
-					}else{
-						mui.toast(result.msg);
-						accountInput.value="";
-						pwdInput.value=""
-					}
-				})
-						
-			}
 			
 		</script>
 	</body>

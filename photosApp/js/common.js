@@ -4,8 +4,10 @@ var defaultImg = '/images/zw.png';
 //加载图片根路径
 var picSrc = "http://127.0.0.1:8080/bookcity/file/downPic.do?attId="
 
+
 //是否debug调试
 var isDebug = true;
+
 //隐藏android原生底部TAB
 function hideTab(){
 	if(isDebug==false){
@@ -97,9 +99,4 @@ function isEmail(strEmail) {
 function isSpecialStr(str){
 	var pattern = new RegExp("[ `~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]");
 	return pattern.test(str);
-}
-
-function fixUserStorage(k, v){
-	//写入个人信息
-	localStorage.setItem('user' + k, v);
 }

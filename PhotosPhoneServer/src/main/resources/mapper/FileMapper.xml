@@ -11,4 +11,14 @@
   	insert into tb_attachment values(#{attId},#{picPath},#{picName})
   </insert>
   
+  <!-- 查询本地磁盘导入数据记录表 -->
+  <select id="selectDiskRecord" parameterType="map" resultType="map">
+  	SELECT count(1),uplode_date FROM tb_disk_record where user_id = #{userId} and file_path = #{filePath}
+  </select>
+  
+  <!-- 往本地磁盘导入数据记录表中插入数据 -->
+  <insert id="insertDiskRecord" parameterType="map">
+    insert into tb_disk_record values(#{recordId},#{userId},#{filePath},#{uplodeDate})
+  </insert>
+  
 </mapper>

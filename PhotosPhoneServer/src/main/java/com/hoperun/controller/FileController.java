@@ -43,11 +43,12 @@ public class FileController {
 	 */
 	@RequestMapping(value="/insertPic")
 	@ResponseBody
-	public ReturnInfo insertPic(HttpServletRequest req, String dirPath) throws Exception{
+	public ReturnInfo insertPic(HttpServletRequest req, String dirPath, String userId) throws Exception{
 		ReturnInfo rtn = new ReturnInfo();
 		List<Map<String,Object>> rtnList = new ArrayList<Map<String,Object>>();
 		try {
-			fileService.insertPic(dirPath);
+			Map<String,String> rtnMap = fileService.insertPic(dirPath, userId);
+			rtn.setData(rtnMap);
 		} catch (Exception e) {
 			ReturnInfo errRtn = new ReturnInfo();
 			errRtn.setRtnCode(888);

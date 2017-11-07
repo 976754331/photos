@@ -4,7 +4,7 @@
   
   <!-- 根据登录名获取密码和userId -->
   <select id="selectLogin" parameterType="map" resultType="map">
-  	SELECT user_id,password,login_name FROM tb_user where login_name = #{loginName}
+  	SELECT user_id,password,login_name,name FROM tb_user where login_name = #{loginName}
   </select>
   
   <!-- 根据userId查询用户信息 -->

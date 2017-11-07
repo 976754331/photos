@@ -30,7 +30,47 @@ CREATE TABLE `tb_pic_type` (
 
 建表
 照片tb_pic pic_id,pic_name,attachment_id, shoot_date,shoot_person,addr,upload_date,desc,intro
+DROP TABLE IF EXISTS `tb_pic`;
+CREATE TABLE `tb_pic` (
+  `pic_id` varchar(50) NOT NULL COMMENT '图片主键',
+  `pic_name` varchar(50) DEFAULT NULL COMMENT '图片名称',
+  `attachment_id` varchar(50) DEFAULT NULL COMMENT '图片附件id',
+  `shoot_date` varchar(50) DEFAULT NULL COMMENT '拍摄时间',
+  `shoot_person` varchar(50) DEFAULT NULL COMMENT '拍摄人',
+  `addr` varchar(75) DEFAULT NULL COMMENT '拍摄地点',
+  `upload_date` varchar(50) DEFAULT NULL COMMENT '上传时间',
+  `desc` text COMMENT '图片描述',
+  `intro` text COMMENT '图片介绍',
+  PRIMARY KEY (`pic_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='图片表';
+
+
 照片分类表tb_pic_type  pic_id, type_id
+DROP TABLE IF EXISTS `tb_types`;
+CREATE TABLE `tb_types` (
+  `pic_id` varchar(50) DEFAULT NULL COMMENT '图片id',
+  `type_id` varchar(50) DEFAULT NULL COMMENT '分类id'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='图片分类表，实现图片与类型多对多';
+
+
 附件表tb_attachment  attachment_id, pic_path, pic_name
+DROP TABLE IF EXISTS `tb_attachment`;
+CREATE TABLE `tb_attachment` (
+  `attachment_id` varchar(50) NOT NULL COMMENT '附件id',
+  `pic_path` varchar(155) DEFAULT NULL COMMENT '图片路径',
+  `pic_name` varchar(50) DEFAULT NULL COMMENT '图片名',
+  PRIMARY KEY (`attachment_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='图片附件表，存储图片的存储信息';
+
+
 评论表tb_comment comment_id,user_id,pic_id,comment_date,content
+DROP TABLE IF EXISTS `tb_comment`;
+CREATE TABLE `tb_comment` (
+  `comment_id` varchar(50) NOT NULL COMMENT '评论id',
+  `user_id` varchar(50) DEFAULT NULL COMMENT '评论人id',
+  `pic_id` varchar(50) DEFAULT NULL COMMENT '图片id',
+  `comment_date` varchar(50) DEFAULT NULL COMMENT '评论时间',
+  `content` text,
+  PRIMARY KEY (`comment_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='图片评论表';
 

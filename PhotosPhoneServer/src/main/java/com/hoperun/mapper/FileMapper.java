@@ -15,4 +15,17 @@ public interface FileMapper{
 	   * @return
 	   */
 	 public void inserPic(Map<String, String> params);
+	 
+	 /**
+	   * 查询本地磁盘导入数据记录表
+	   * @return
+	   */
+	 public Map<String, Object> selectDiskRecord(Map<String, String> params);
+	 
+	 /**
+	   * 往本地磁盘导入数据记录表中插入数据
+	   * @return
+	   */
+	 public void insertDiskRecord(Map<String, String> params);
+
 }

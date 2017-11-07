@@ -1,3 +1,29 @@
+//页面加载完事件
+$(function() {
+	//上传本地文件点击事件
+	document.getElementById("diskBtn").onclick = function() {
+		var diskPath = prompt("请输入本地文件磁盘路径，根路径哦", "比如F:/test");
+		if(diskPath == "比如F:/test" || diskPath == "") {
+			alert("请输入正确的文件路径");
+		} else {
+			if(diskPath == null) {
+				
+			} else {
+				var params = {dirPath:diskPath,userId:localStorage.getItem('userid')}
+				simpAjax(Url + "/file/insertPic.do", params, function(result) {
+					if(result.rtn_code == 0) {
+						
+					} else {
+						mui.toast(result.msg);
+					}
+				})
+			}
+
+		}
+	};
+
+})
+
 //加载二级分类
 function loadSecondMenu(dataid, menuDiv) {
 	var params = {
@@ -23,15 +49,15 @@ function loadSecondMenu(dataid, menuDiv) {
 				var typeId = $(this).attr("data-id");
 				var btnName = $(this).children().text();
 				mui.openWindow({
-					url:encodeURI('../person/picture.html?'+typeId+'?'+btnName),
-					id:'../person/picture.html',
-					extras:{
-						typeId:typeId,
-						btnName:btnName
+					url: encodeURI('../person/picture.html?' + typeId + '?' + btnName),
+					id: '../person/picture.html',
+					extras: {
+						typeId: typeId,
+						btnName: btnName
 					}
-					
+
 				});
-				
+
 				//loadImage(typeId);				
 			})
 		} else {
@@ -39,6 +65,8 @@ function loadSecondMenu(dataid, menuDiv) {
 		}
 	})
 }
+
+
 
 //加载主分类菜单
 function loadMenu() {
