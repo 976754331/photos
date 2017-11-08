@@ -34,6 +34,21 @@ public class TypeServiceImpl  implements ITypeService{
 		 return typeMapper.selectSecondType(params);
 	 }
 	
+	 /**
+	   * 创建一级分类
+	   * @return
+	   */
+	 public void insertFirstTypes(Map<String, String> params) throws ServiceException{
+		 typeMapper.insertFirstTypes(params);
+	 }
+	 
+	 /**
+	   * 创建二级分类
+	   * @return
+	   */
+	public void insertSecondTypes(Map<String, String> params) throws ServiceException{
+		typeMapper.insertDiskType(params);
+	}
 
 	
 }

@@ -29,4 +29,9 @@ public interface TypeMapper{
 	   */
 	 public void insertTypesFromDisk(Map<String, String> params);
 	 
+	  /**
+	   * 创建一级分类
+	   * @return
+	   */
+	 public void insertFirstTypes(Map<String, String> params);
 }

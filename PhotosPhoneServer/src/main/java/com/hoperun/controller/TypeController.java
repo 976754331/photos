@@ -72,5 +72,50 @@ public class TypeController{
 		return rtn;
 	}
 	
+	/**
+	 * 创建一级分类
+	 * @param params
+	 * @return
+	 */
+	@RequestMapping(value = "insertFirst")
+	@ResponseBody
+	public ReturnInfo insertFirstTypes(HttpServletRequest request, String typeName) {
+		ReturnInfo rtn = new ReturnInfo();
+		Map<String,String> params = new HashMap<String, String>();
+		params.put("typeName", typeName);
+		try {
+			typeService.insertFirstTypes(params);
+			rtn.setData("OK");
+		} catch (ServiceException e) {
+			ReturnInfo errRtn = new ReturnInfo();
+			errRtn.setRtnCode(888);
+			errRtn.setMsg("sql异常，执行操作失败");
+		}
+		return rtn;
+	}
+	
+	/**
+	 * 创建二级分类
+	 * @param params
+	 * @return
+	 */
+	@RequestMapping(value = "insertSecond")
+	@ResponseBody
+	public ReturnInfo insertSecondTypes(HttpServletRequest request,String parentId, String typeName) {
+		ReturnInfo rtn = new ReturnInfo();
+		Map<String,String> params = new HashMap<String, String>();
+		params.put("typeName", typeName);
+		params.put("parentId", parentId);
+		try {
+			typeService.insertSecondTypes(params);
+			rtn.setData("OK");
+		} catch (ServiceException e) {
+			ReturnInfo errRtn = new ReturnInfo();
+			errRtn.setRtnCode(888);
+			errRtn.setMsg("sql异常，执行操作失败");
+		}
+		return rtn;
+	}
+	
 	
 }

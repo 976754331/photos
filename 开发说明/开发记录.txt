@@ -30,11 +30,18 @@ http://127.0.0.1:8080/bookcity/file/insertPic.do?dirPath=F:/test
 建立读取页面，使用户自行设置分类
 
 //
-创建导入数据记录表，一个人不能多次导入同一个本地磁盘
-首页创建按钮  --导入磁盘数据
+//创建导入数据记录表，一个人不能多次导入同一个本地磁盘
+//首页创建按钮  --导入磁盘数据
 首页创建按钮  --创建分类
 一级分类上创建按钮  --创建二级分类
 新增评论和上传功能
+可以自由设置分类
+
+插入一级类型
+http://localhost:8080/bookcity/type/insertFirst.do
+
+插入二级类型
+http://localhost:8080/bookcity/type/insertSecond.do
 
 
 

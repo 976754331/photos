@@ -12,14 +12,21 @@
   </select>
   
   <!-- 读取本地文件时插入新的文件夹分类 -->
+  <!-- 插入二级分类 -->
   <insert id="insertDiskType" parameterType="map">
   	insert into tb_pic_type (type_id,type_name,parent_id)
   	values(#{typeId},#{typeName},#{parentId})
   </insert>
   
   <!-- 读取本地文件时往分类与图片关联表中插入数据 -->
-  <insert id="insertTypesFromDisk">
+  <insert id="insertTypesFromDisk" parameterType="map">
     insert into tb_types values(#{picId},#{typeId})
+  </insert>
+  
+  <!-- 创建一级分类 -->
+  <insert id="insertFirstTypes" parameterType="map">
+    insert into tb_pic_type (type_id,type_name)
+  	values(#{typeId},#{typeName})
   </insert>
   
   

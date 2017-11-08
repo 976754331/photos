@@ -52,6 +52,38 @@ CREATE TABLE `tb_types` (
   `type_id` varchar(50) DEFAULT NULL COMMENT '分类id'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='图片分类表，实现图片与类型多对多';
 
+-- ----------------------------
+-- Records of tb_pic_type
+-- ----------------------------
+INSERT INTO `tb_pic_type` VALUES ('1', '个人展示', null, null);
+INSERT INTO `tb_pic_type` VALUES ('101', 'Peter', '1', null);
+INSERT INTO `tb_pic_type` VALUES ('102', 'Selinely', '1', null);
+INSERT INTO `tb_pic_type` VALUES ('103', 'Glolin', '1', null);
+INSERT INTO `tb_pic_type` VALUES ('104', 'Anlen', '1', null);
+INSERT INTO `tb_pic_type` VALUES ('2', '我的足迹', null, null);
+INSERT INTO `tb_pic_type` VALUES ('201', '西安', '2', null);
+INSERT INTO `tb_pic_type` VALUES ('202', '成都', '2', null);
+INSERT INTO `tb_pic_type` VALUES ('203', '北京', '2', null);
+INSERT INTO `tb_pic_type` VALUES ('204', '西宁', '2', null);
+INSERT INTO `tb_pic_type` VALUES ('205', '兰州', '2', null);
+INSERT INTO `tb_pic_type` VALUES ('206', '南宁', '2', null);
+INSERT INTO `tb_pic_type` VALUES ('3', '在路上', null, null);
+INSERT INTO `tb_pic_type` VALUES ('301', '太白山', '3', null);
+INSERT INTO `tb_pic_type` VALUES ('302', '青海湖', '3', null);
+INSERT INTO `tb_pic_type` VALUES ('303', '华山', '3', null);
+INSERT INTO `tb_pic_type` VALUES ('304', '骊山', '3', null);
+INSERT INTO `tb_pic_type` VALUES ('305', '凤凰城', '3', null);
+INSERT INTO `tb_pic_type` VALUES ('306', '周公庙', '3', null);
+INSERT INTO `tb_pic_type` VALUES ('4', '其他...', null, null);
+INSERT INTO `tb_pic_type` VALUES ('401', '实习', '4', null);
+INSERT INTO `tb_pic_type` VALUES ('402', '拓展', '4', null);
+INSERT INTO `tb_pic_type` VALUES ('403', '聚餐', '4', null);
+INSERT INTO `tb_pic_type` VALUES ('5', '本地文件扫描', null, '扫描本地文件并上传');
+INSERT INTO `tb_pic_type` VALUES ('dea9f14bcd814cf4a1b535bb24af88ff', 'test', '5', null);
+INSERT INTO `tb_pic_type` VALUES ('e36a41add2d14c41b0be7ef5e39f3bed', 'book', '5', null);
+INSERT INTO `tb_pic_type` VALUES ('ee740af51c4a47d5bb498f3169fa8ec7', 'fj', '5', null);
+INSERT INTO `tb_pic_type` VALUES ('fc47a01d7b844ce1996f338ce2410f38', 'touxiang', '5', null);
+
 
 附件表tb_attachment  attachment_id, pic_path, pic_name
 DROP TABLE IF EXISTS `tb_attachment`;
@@ -73,4 +105,16 @@ CREATE TABLE `tb_comment` (
   `content` text,
   PRIMARY KEY (`comment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='图片评论表';
+
+个人上传本地文件记录表
+DROP TABLE IF EXISTS `tb_disk_record`;
+CREATE TABLE `tb_disk_record` (
+  `record_id` varchar(50) NOT NULL COMMENT '记录id，主键',
+  `user_id` varchar(50) DEFAULT NULL COMMENT '用户id',
+  `file_path` varchar(155) DEFAULT NULL COMMENT '上传本地磁盘文件路径',
+  `uplode_date` varchar(50) DEFAULT NULL COMMENT '上传时间'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='个人上传本地文件记录表';
+
+
+
 

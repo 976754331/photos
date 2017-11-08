@@ -20,5 +20,17 @@ public interface ITypeService {
 	   */
 	 public List<Map<String, Object>> selectSecondType(Map<String, String> params) throws ServiceException;
 	
+	 /**
+	   * 创建一级分类
+	   * @return
+	   */
+	 public void insertFirstTypes(Map<String, String> params) throws ServiceException;
+
+	 /**
+	   * 创建二级分类
+	   * @return
+	   */
+	public void insertSecondTypes(Map<String, String> params) throws ServiceException;
+	 
 }
 
