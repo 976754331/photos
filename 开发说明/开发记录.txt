@@ -22,7 +22,7 @@ http://localhost:8080/bookcity/picture/list.do?typeId=101
 http://127.0.0.1:8080/bookcity/file/downPic.do?attId=1
 
 往数据库中写入本地文件的数据
-http://127.0.0.1:8080/bookcity/file/insertPic.do?dirPath=F://test
+http://127.0.0.1:8080/bookcity/file/insertPic.do?dirPath=F:/test
 
 //问题
 1.如何读取图片并分类

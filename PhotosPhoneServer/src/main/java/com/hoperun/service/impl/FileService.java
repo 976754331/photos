@@ -111,12 +111,15 @@ public class FileService implements IFileService {
 			return rtnMap;
 		}else{//未插入调下面私有方法插入数据
 			//#{recordId},#{userId},#{filePath},#{uplodeDate}
-			
-			
-		}
-
-		
-		return null;
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String uplodeDate = df.format(new Date());
+			String recordId = UUID.randomUUID().toString().replaceAll("-", "");
+			params.put("uplodeDate", uplodeDate);
+			params.put("recordId", recordId);
+			fileMapper.insertDiskRecord(params);
+			rtnMap = insertIntoPic(dirPath);			
+			return rtnMap;			
+		}		
 	}
 
 	/**

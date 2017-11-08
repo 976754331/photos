@@ -45,7 +45,6 @@ public class FileController {
 	@ResponseBody
 	public ReturnInfo insertPic(HttpServletRequest req, String dirPath, String userId) throws Exception{
 		ReturnInfo rtn = new ReturnInfo();
-		List<Map<String,Object>> rtnList = new ArrayList<Map<String,Object>>();
 		try {
 			Map<String,String> rtnMap = fileService.insertPic(dirPath, userId);
 			rtn.setData(rtnMap);
@@ -54,7 +53,6 @@ public class FileController {
 			errRtn.setRtnCode(888);
 			errRtn.setMsg("sql异常，执行操作失败");
 		}
-		rtn.setData(rtnList);
 		return rtn;
 	}
 	
