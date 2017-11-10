@@ -1,5 +1,21 @@
 //页面加载完事件
 $(function() {
+	//创建一级分类	
+	document.getElementById("addFirstType").onclick = function() {
+		var firstType = prompt("请输入分类名称");
+		if(firstType == "") {
+			alert("请输入正确的分类名称");
+		}else{
+			if(firstType == null) {		
+				//点击取消
+			} else {
+				var params = {dirPath:diskPath,userId:localStorage.getItem('userid')}
+				
+			}
+		}
+		
+	}
+	
 	//上传本地文件点击事件
 	document.getElementById("diskBtn").onclick = function() {
 		var diskPath = prompt("请输入本地文件磁盘路径，根路径哦", "比如F:/test");
@@ -7,12 +23,14 @@ $(function() {
 			alert("请输入正确的文件路径");
 		} else {
 			if(diskPath == null) {
-				
+				//点击取消
 			} else {
 				var params = {dirPath:diskPath,userId:localStorage.getItem('userid')}
 				simpAjax(Url + "/file/insertPic.do", params, function(result) {
 					if(result.rtn_code == 0) {
-						
+						if(result.msg == "ok"){
+							mui.toast("上传成功");
+						}
 					} else {
 						mui.toast(result.msg);
 					}

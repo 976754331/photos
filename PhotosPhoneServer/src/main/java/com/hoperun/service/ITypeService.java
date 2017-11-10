@@ -24,13 +24,13 @@ public interface ITypeService {
 	   * 创建一级分类
 	   * @return
 	   */
-	 public void insertFirstTypes(Map<String, String> params) throws ServiceException;
+	 public Map<String, String> insertFirstTypes(Map<String, String> params) throws ServiceException;
 
 	 /**
 	   * 创建二级分类
 	   * @return
 	   */
-	public void insertSecondTypes(Map<String, String> params) throws ServiceException;
+	public Map<String, String> insertSecondTypes(Map<String, String> params) throws ServiceException;
 	 
 }
 

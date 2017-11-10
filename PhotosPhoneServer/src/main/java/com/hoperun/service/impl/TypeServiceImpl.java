@@ -2,6 +2,7 @@ package com.hoperun.service.impl;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,16 +39,23 @@ public class TypeServiceImpl  implements ITypeService{
 	   * 创建一级分类
 	   * @return
 	   */
-	 public void insertFirstTypes(Map<String, String> params) throws ServiceException{
+	 public Map<String, String> insertFirstTypes(Map<String, String> params) throws ServiceException{
+		 String typeId = UUID.randomUUID().toString().replaceAll("-", "");
+		 params.put("typeId", typeId);
 		 typeMapper.insertFirstTypes(params);
+		 return params;
+		 
 	 }
 	 
 	 /**
 	   * 创建二级分类
 	   * @return
 	   */
-	public void insertSecondTypes(Map<String, String> params) throws ServiceException{
+	public Map<String, String> insertSecondTypes(Map<String, String> params) throws ServiceException{
+		String typeId = UUID.randomUUID().toString().replaceAll("-", "");
+		params.put("typeId", typeId);
 		typeMapper.insertDiskType(params);
+		return params;
 	}
 
 	

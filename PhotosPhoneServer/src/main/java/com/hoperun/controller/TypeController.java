@@ -84,8 +84,8 @@ public class TypeController{
 		Map<String,String> params = new HashMap<String, String>();
 		params.put("typeName", typeName);
 		try {
-			typeService.insertFirstTypes(params);
-			rtn.setData("OK");
+			Map<String, String> rtnMap = typeService.insertFirstTypes(params);
+			rtn.setData(rtnMap);
 		} catch (ServiceException e) {
 			ReturnInfo errRtn = new ReturnInfo();
 			errRtn.setRtnCode(888);
@@ -107,8 +107,8 @@ public class TypeController{
 		params.put("typeName", typeName);
 		params.put("parentId", parentId);
 		try {
-			typeService.insertSecondTypes(params);
-			rtn.setData("OK");
+			Map<String, String> rtnMap = typeService.insertSecondTypes(params);
+			rtn.setData(rtnMap);
 		} catch (ServiceException e) {
 			ReturnInfo errRtn = new ReturnInfo();
 			errRtn.setRtnCode(888);

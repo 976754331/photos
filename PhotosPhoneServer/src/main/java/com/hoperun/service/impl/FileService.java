@@ -106,7 +106,7 @@ public class FileService implements IFileService {
 		params.put("userId", userId);
 		params.put("filePath", dirPath);
 		Map<String, Object> result = fileMapper.selectDiskRecord(params);
-		if(Integer.parseInt(result.get("count").toString()) == 1){ //已插入则不让操作并提示上次操作时间
+		if(result.get("count(1)") != null && Integer.parseInt(result.get("count(1)").toString()) == 1){ //已插入则不让操作并提示上次操作时间
 			rtnMap.put("msg", "你已导入此磁盘，上次导入时间为： "+ result.get("uplode_date"));
 			return rtnMap;
 		}else{//未插入调下面私有方法插入数据
