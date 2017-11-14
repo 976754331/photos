@@ -5,6 +5,26 @@
 			"css/mui.min.css",
 			"images/fengjing/tx001007.jpg",
 			"js/common.js",
+			"js/jquery-1.10.2.min.js",
+			"js/login.js"
+		],
+		"refer": [
+			"html/portal/mainPortal.html"
+		]
+	},
+	"html/portal/mainPortal.html": {
+		"resources": [
+			"images/fengjing/fj001003.png",
+			"images/fengjing/fj001001.png",
+			"images/fengjing/fj001002.png",
+			"fonts/mui.ttf",
+			"images/fengjing/fj001004.png",
+			"images/fengjing/fj001005.png",
+			"js/mui.js",
+			"js/loadMenu.js",
+			"images/icon/addFirstType.jpg",
+			"js/common.js",
+			"css/mui.min.css",
 			"js/jquery-1.10.2.min.js"
 		]
 	}

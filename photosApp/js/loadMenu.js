@@ -9,7 +9,8 @@ $(function() {
 			if(firstType == null) {		
 				//点击取消
 			} else {
-				var params = {dirPath:diskPath,userId:localStorage.getItem('userid')}
+				var params = {dirPath:diskPath,userId:localStorage.getItem('userid'),}
+				
 				
 			}
 		}
@@ -25,14 +26,16 @@ $(function() {
 			if(diskPath == null) {
 				//点击取消
 			} else {
-				var params = {dirPath:diskPath,userId:localStorage.getItem('userid')}
+				var params = {dirPath:diskPath,userId:localStorage.getItem('userid')};
 				simpAjax(Url + "/file/insertPic.do", params, function(result) {
 					if(result.rtn_code == 0) {
-						if(result.msg == "ok"){
+						if(result.data.msg == "ok"){
 							mui.toast("上传成功");
+						}else{
+							mui.toast(result.data.msg);
 						}
 					} else {
-						mui.toast(result.msg);
+						mui.toast(result.data.msg);
 					}
 				})
 			}

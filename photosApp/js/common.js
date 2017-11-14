@@ -29,8 +29,8 @@ function GetQueryString(key){
 
 //定义ajax URL
 //var Url = "http://10.50.30.201:9001/bookcity";
-var Url = "http://localhost:8080/bookcity";
-//var Url = "http://10.50.30.201:8080/bookcity";
+//var Url = "http://192.168.0.104:8080/bookcity";
+var Url = "http://10.50.30.141:8080/bookcity";
 
 //封装通用AJAX方法
 function simpAjax(url, data, successCallBack, errorCallBack, async) {
