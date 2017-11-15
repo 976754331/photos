@@ -34,11 +34,24 @@ var Url = "http://10.50.30.141:8080/bookcity";
 
 //封装通用AJAX方法
 function simpAjax(url, data, successCallBack, errorCallBack, async) {
+	var sessionId=localStorage.getItem('sessionId');
+	if(sessionId!=null){
+		if(url.indexOf('?')!=-1){
+			var urls = url.split('?');
+			url=urls[0]+localStorage.getItem('sessionId')+"?"+urls[1]+"?userFlag="+localStorage.getItem('userid');
+		}else{
+			url=url+localStorage.getItem('sessionId')+"?userFlag="+localStorage.getItem('userid');
+		}
+	}
+	
 	$.ajax({
 		url:url,
 		data: data,
 		dataType: 'json', //服务器返回json格式数据
 		type: 'post', //HTTP请求类型
+		//xhrFields: {
+		//	withCredentials: true
+		//},
 		success: function(data) {
 		   if(data.rtn_code=='10000'){
 		        mui.alert('操作超时，请重新登录','提示',['确认'],function(){

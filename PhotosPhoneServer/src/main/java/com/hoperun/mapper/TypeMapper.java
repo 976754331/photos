@@ -9,7 +9,7 @@ public interface TypeMapper{
 	   * 查询一级分类
 	   * @return
 	   */
-	 public List<Map<String, Object>> selectFirstType();
+	 public List<Map<String, Object>> selectFirstType(Map<String, String> params);
 	  
 	 /**
 	   * 查询二级分类

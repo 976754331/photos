@@ -3,6 +3,10 @@ package com.hoperun.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +28,7 @@ public class UserServiceImpl  implements IUserService{
 	 * @return
 	 */
 	@Override
-	public Map<String, Object> selectLogin(Map<String, String> params) throws ServiceException{
+	public Map<String, Object> selectLogin(HttpServletRequest request, Map<String, String> params) throws ServiceException{
 		Map<String, Object> rtnMap = new HashMap<String, Object>();
 		Map<String, Object> resultMap = userMapper.selectLogin(params);
 		if(resultMap == null){
@@ -44,10 +48,38 @@ public class UserServiceImpl  implements IUserService{
 			rtnMap.put("msg", "密码正确");
 			rtnMap.put("userId", resultMap.get("user_id").toString());
 			rtnMap.put("name", resultMap.get("name").toString());
-			return rtnMap;
+			//return rtnMap;
 		}else{
 			rtnMap.put("flag", "0");
 			rtnMap.put("msg", "输入密码错误");					
+		}
+		if("1".equals(rtnMap.get("flag"))){  //登录成功
+			HttpSession session = request.getSession();
+			//每个账号只允许单个用户登录
+//			ServletContext sc = session.getServletContext();
+//			Object objMap = sc.getAttribute("existMap");
+//			Map<String, String> existMap = new HashMap<String, String>();
+//			if (objMap != null && objMap instanceof Map) {
+//				existMap = (Map<String, String>) objMap;
+//			}
+			String sessionId = session.getId();
+			String userId =  rtnMap.get("userId").toString();
+			//后登录者干掉之前登录者
+//			existMap.put(userId, sessionId);
+//			session.getServletContext().setAttribute("existMap", existMap);
+			
+//			//根据userId查询session信息
+//			Map<String, String> sessionParam = new HashMap<String, String>();
+//			sessionParam.put("userId", userId);
+//			sessionParam.put("sessionId", sessionId);
+//			Map<String, Object> resMap = userMapper.selectSession(sessionParam);
+//			if(resMap == null){  //无session信息新增
+//				userMapper.insertSession(sessionParam);
+//			}else{  //有则更新
+//				userMapper.updateSession(sessionParam);
+//			}			
+			session.setAttribute("userId", userId);
+			rtnMap.put("sessionId", sessionId);
 		}
 		return rtnMap;
 	}

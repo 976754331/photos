@@ -117,7 +117,7 @@ public class FileService implements IFileService {
 			params.put("uplodeDate", uplodeDate);
 			params.put("recordId", recordId);
 			fileMapper.insertDiskRecord(params);
-			rtnMap = insertIntoPic(dirPath);			
+			rtnMap = insertIntoPic(dirPath, userId);			
 			return rtnMap;			
 		}		
 	}
@@ -125,7 +125,7 @@ public class FileService implements IFileService {
 	/**
 	 * 往数据库中写入本地文件的数据 String testDir = "F:/test";
 	 */
-	private Map<String, String> insertIntoPic(String dirPath) throws Exception {
+	private Map<String, String> insertIntoPic(String dirPath, String userId) throws Exception {
 		// 首先读文件
 		Map<String, String> rtnMap = new HashMap<String, String>();
 		dirPath = dirPath.replaceAll("\\\\", "/");
@@ -142,6 +142,7 @@ public class FileService implements IFileService {
 		typeParams.put("typeId", typeId);
 		typeParams.put("typeName", dir.getName());
 		typeParams.put("parentId", DISK_TYPE_ID);
+		typeParams.put("userId", userId);
 		typeMapper.insertDiskType(typeParams);
 
 		File[] files = dir.listFiles();
@@ -150,7 +151,7 @@ public class FileService implements IFileService {
 			File file = files[i];
 			if (file.isDirectory()) {
 				// 文件夹递归遍历
-				insertIntoPic(dirPath + "/" + file.getName());
+				insertIntoPic(dirPath + "/" + file.getName(), userId);
 
 			} else {
 				String attId = UUID.randomUUID().toString().replaceAll("-", "");

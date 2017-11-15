@@ -10,9 +10,10 @@ public interface ITypeService {
 	
 	/**
 	   * 查询一级分类
+	 * @param userId 
 	   * @return
 	   */
-	 public List<Map<String, Object>> selectFirstType() throws ServiceException;
+	 public List<Map<String, Object>> selectFirstType(String userId) throws ServiceException;
 	  
 	 /**
 	   * 查询二级分类

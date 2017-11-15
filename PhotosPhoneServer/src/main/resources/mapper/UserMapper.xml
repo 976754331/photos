@@ -2,6 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hoperun.mapper.UserMapper">
   
+  <!-- 查询用户登录会话 -->
+  <select id="selectSession" parameterType="map" resultType="map">
+  	SELECT * FROM tb_user_session where user_id = #{userId}
+  </select>
+  
+  <!-- 添加用户登录会话 -->
+  <insert id="insertSession" parameterType="map">
+    insert into tb_user_session VALUES (#{userId}, #{sessionId})
+  </insert>
+  
+  <!-- 修改用户登录会话 -->
+  <update id="updateSession" parameterType="map">
+    update tb_user_session set session_id = #{sessionId} where user_id = #{userId}
+  </update>
+  
   <!-- 根据登录名获取密码和userId -->
   <select id="selectLogin" parameterType="map" resultType="map">
   	SELECT user_id,password,login_name,name FROM tb_user where login_name = #{loginName}

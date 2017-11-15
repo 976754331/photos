@@ -11,7 +11,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
+/**
+ * session拦截器，只允许一台设备登录账号
+ * @author houyaohui
+ *
+ */
 public class SessionInterceptor implements HandlerInterceptor {
 	@Override
 	public void afterCompletion(HttpServletRequest request,
@@ -35,14 +39,13 @@ public class SessionInterceptor implements HandlerInterceptor {
 			HttpServletResponse response, Object handler) throws Exception {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		// TODO Auto-generated method stub
-		/*String requestUri = request.getRequestURI();
+		String requestUri = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String url = requestUri.substring(contextPath.length());
-		if (null == url || url.equals("/logout.do")
-				|| url.equals("/forgetPwd.do") || url.equals("/login.do")) {
-			return false;
+		if (null == url || url.contains("/logout.do") || url.contains("/login.do")) {
+			return true;
 		}
-		String userId = request.getParameter("userId");
+		String userId = request.getParameter("userFlag");
 		HttpSession httpSession = request.getSession();
 		ServletContext context = request.getSession().getServletContext();
 		Map<String, String> existMap = (Map<String, String>) context
@@ -53,10 +56,10 @@ public class SessionInterceptor implements HandlerInterceptor {
 			if (existMap.containsKey(userId)) {
 				String jsessionId = existMap.get(userId);
 				if (!jsessionId.equals(httpSession.getId())) {
-					httpSession.setAttribute("userId", userId);
-					existMap.put("userId", jsessionId);
+					/*httpSession.setAttribute("userId", userId);
+					existMap.put("userId", jsessionId);*/
 					PrintWriter pw = response.getWriter();
-					String retStr = "{\"msg\":\"会话过期，请重新登陆\",\"data\":\"\",\"rtn_code\":10000}";
+					String retStr = "{\"msg\":\"请求超时,请重新登录\",\"data\":\"\",\"rtn_code\":10000}";
 					pw.write(retStr);
 					return false;
 				}
@@ -64,7 +67,7 @@ public class SessionInterceptor implements HandlerInterceptor {
 				existMap.put(userId, httpSession.getId());
 			}
 		}
-		context.setAttribute("existMap", existMap);*/
+		context.setAttribute("existMap", existMap);
 		
 		return true;
 	}

@@ -9,7 +9,8 @@ function opneNew(url) {
 				localStorage.clear();				
 				localStorage.setItem('userid', result.data.userId);
 				localStorage.setItem('username', result.data.name);
-				console.log(localStorage.getItem("userid"));				
+				localStorage.setItem('sessionId', ";jsessionid="+result.data.sessionId);
+				//console.log(localStorage.getItem("userid"));				
 				mui.openWindow(url);
 			} else {
 				accountInput.value = "";

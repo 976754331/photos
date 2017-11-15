@@ -5,16 +5,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.hoperun.exception.ServiceException;
 import com.hoperun.model.vo.ReturnInfo;
 import com.hoperun.service.ITypeService;
+import com.hoperun.util.UserUtil;
 
 /**
  * 获取图片类型
@@ -39,7 +44,10 @@ public class TypeController{
 		ReturnInfo rtn = new ReturnInfo();
 		List<Map<String,Object>> rtnList = new ArrayList<Map<String,Object>>();
 		try {
-			rtnList = typeService.selectFirstType();
+			
+			String userId = UserUtil.getUserId(request);
+			
+			rtnList = typeService.selectFirstType(userId);
 		} catch (ServiceException e) {
 			ReturnInfo errRtn = new ReturnInfo();
 			errRtn.setRtnCode(888);
@@ -60,7 +68,9 @@ public class TypeController{
 		ReturnInfo rtn = new ReturnInfo();
 		List<Map<String,Object>> rtnList = new ArrayList<Map<String,Object>>();
 		Map<String,String> params = new HashMap<String, String>();
+		String userId = UserUtil.getUserId(request);
 		params.put("parentId", parentId);
+		params.put("userId", userId);
 		try {
 			rtnList = typeService.selectSecondType(params);
 		} catch (ServiceException e) {
@@ -82,6 +92,8 @@ public class TypeController{
 	public ReturnInfo insertFirstTypes(HttpServletRequest request, String typeName) {
 		ReturnInfo rtn = new ReturnInfo();
 		Map<String,String> params = new HashMap<String, String>();
+		String userId = UserUtil.getUserId(request);
+		params.put("userId", userId);
 		params.put("typeName", typeName);
 		try {
 			Map<String, String> rtnMap = typeService.insertFirstTypes(params);
@@ -104,6 +116,8 @@ public class TypeController{
 	public ReturnInfo insertSecondTypes(HttpServletRequest request,String parentId, String typeName) {
 		ReturnInfo rtn = new ReturnInfo();
 		Map<String,String> params = new HashMap<String, String>();
+		String userId = UserUtil.getUserId(request);
+		params.put("userId", userId);
 		params.put("typeName", typeName);
 		params.put("parentId", parentId);
 		try {

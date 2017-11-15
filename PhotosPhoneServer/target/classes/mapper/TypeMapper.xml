@@ -2,20 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hoperun.mapper.TypeMapper">
   <!-- 查询一级分类 -->
-  <select id="selectFirstType" resultType="map">
-    SELECT type_id,type_name FROM tb_pic_type WHERE parent_id is null
+  <select id="selectFirstType" parameterType="map" resultType="map">
+    SELECT type_id,type_name FROM tb_pic_type WHERE parent_id is null and user_id = #{userId}
   </select>
   
   <!-- 查询二级分类 -->
   <select id="selectSecondType" parameterType="map" resultType="map">
-    SELECT type_id,type_name FROM tb_pic_type WHERE parent_id = #{parentId}
+    SELECT type_id,type_name FROM tb_pic_type WHERE parent_id = #{parentId} and user_id = #{userId}
   </select>
   
   <!-- 读取本地文件时插入新的文件夹分类 -->
   <!-- 插入二级分类 -->
   <insert id="insertDiskType" parameterType="map">
-  	insert into tb_pic_type (type_id,type_name,parent_id)
-  	values(#{typeId},#{typeName},#{parentId})
+  	insert into tb_pic_type (type_id,type_name,parent_id,user_id)
+  	values(#{typeId},#{typeName},#{parentId},#{userId}) 
   </insert>
   
   <!-- 读取本地文件时往分类与图片关联表中插入数据 -->
@@ -25,8 +25,8 @@
   
   <!-- 创建一级分类 -->
   <insert id="insertFirstTypes" parameterType="map">
-    insert into tb_pic_type (type_id,type_name)
-  	values(#{typeId},#{typeName})
+    insert into tb_pic_type (type_id,type_name,user_id)
+  	values(#{typeId},#{typeName},#{userId})
   </insert>
   
   

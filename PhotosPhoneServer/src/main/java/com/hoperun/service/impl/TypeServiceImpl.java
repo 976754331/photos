@@ -1,5 +1,6 @@
 package com.hoperun.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -23,8 +24,10 @@ public class TypeServiceImpl  implements ITypeService{
 	   * 查询一级分类
 	   * @return
 	   */
-	 public List<Map<String, Object>> selectFirstType() throws ServiceException{
-		 return typeMapper.selectFirstType();
+	 public List<Map<String, Object>> selectFirstType(String userId) throws ServiceException{
+		 Map<String, String> params = new HashMap<String, String>();
+		 params.put("userId", userId);
+		 return typeMapper.selectFirstType(params);
 	 }
 	  
 	 /**
