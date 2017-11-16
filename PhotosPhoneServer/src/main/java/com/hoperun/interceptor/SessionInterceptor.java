@@ -4,19 +4,26 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections.map.HashedMap;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.hoperun.mapper.UserMapper;
 /**
  * session拦截器，只允许一台设备登录账号
  * @author houyaohui
  *
  */
 public class SessionInterceptor implements HandlerInterceptor {
+	
+	@Autowired
+	private UserMapper userMapper;
+	
 	@Override
 	public void afterCompletion(HttpServletRequest request,
 			HttpServletResponse response, Object handler, Exception arg3)
@@ -45,8 +52,25 @@ public class SessionInterceptor implements HandlerInterceptor {
 		if (null == url || url.contains("/logout.do") || url.contains("/login.do")) {
 			return true;
 		}
-		String userId = request.getParameter("userFlag");
-		HttpSession httpSession = request.getSession();
+		HttpSession session = request.getSession();
+		String userId = session.getAttribute("userId").toString();
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("userId", userId);
+		Map<String, Object> sessionMap = userMapper.selectSession(params);
+		if(sessionMap != null && sessionMap.get("session_id") != null){
+			if(sessionMap.get("session_id").toString().equals(session.getId())){  //session正确
+				return true;
+			}else{
+				PrintWriter pw = response.getWriter();
+				String retStr = "{\"msg\":\"请求超时,请重新登录\",\"data\":\"\",\"rtn_code\":10000}";
+				pw.write(retStr);
+				return false;
+			}
+		}
+		
+		return true;
+		/**
+		 * 与ServletContext中的数据做比较
 		ServletContext context = request.getSession().getServletContext();
 		Map<String, String> existMap = (Map<String, String>) context
 				.getAttribute("existMap");
@@ -56,8 +80,8 @@ public class SessionInterceptor implements HandlerInterceptor {
 			if (existMap.containsKey(userId)) {
 				String jsessionId = existMap.get(userId);
 				if (!jsessionId.equals(httpSession.getId())) {
-					/*httpSession.setAttribute("userId", userId);
-					existMap.put("userId", jsessionId);*/
+					//httpSession.setAttribute("userId", userId);
+					//existMap.put("userId", jsessionId);
 					PrintWriter pw = response.getWriter();
 					String retStr = "{\"msg\":\"请求超时,请重新登录\",\"data\":\"\",\"rtn_code\":10000}";
 					pw.write(retStr);
@@ -68,8 +92,8 @@ public class SessionInterceptor implements HandlerInterceptor {
 			}
 		}
 		context.setAttribute("existMap", existMap);
+		 */
 		
-		return true;
 	}
 
 }

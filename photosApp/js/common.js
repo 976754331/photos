@@ -2,7 +2,7 @@
 var defaultImg = '/images/zw.png';
 
 //加载图片根路径
-var picSrc = "http://127.0.0.1:8080/bookcity/file/downPic.do?attId="
+var picSrc = "http://10.50.30.141:8080/bookcity/file/downPic.do?attId="
 
 
 //是否debug调试
@@ -34,13 +34,14 @@ var Url = "http://10.50.30.141:8080/bookcity";
 
 //封装通用AJAX方法
 function simpAjax(url, data, successCallBack, errorCallBack, async) {
+	
 	var sessionId=localStorage.getItem('sessionId');
 	if(sessionId!=null){
 		if(url.indexOf('?')!=-1){
 			var urls = url.split('?');
-			url=urls[0]+localStorage.getItem('sessionId')+"?"+urls[1]+"?userFlag="+localStorage.getItem('userid');
+			url=urls[0]+localStorage.getItem('sessionId')+"?"+urls[1];
 		}else{
-			url=url+localStorage.getItem('sessionId')+"?userFlag="+localStorage.getItem('userid');
+			url=url+localStorage.getItem('sessionId');
 		}
 	}
 	
@@ -55,7 +56,7 @@ function simpAjax(url, data, successCallBack, errorCallBack, async) {
 		success: function(data) {
 		   if(data.rtn_code=='10000'){
 		        mui.alert('操作超时，请重新登录','提示',['确认'],function(){
-		            mui.openWindow('index.html');
+		            mui.openWindow('../../index.html');
 		        })
 		    }else{
 		        successCallBack(data);

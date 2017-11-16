@@ -45,8 +45,8 @@ http://localhost:8080/bookcity/type/insertFirst.do
 http://localhost:8080/bookcity/type/insertSecond.do
 
 
-
-
+login: org.apache.catalina.session.StandardSessionFacade@72b5a258
+join: org.apache.catalina.session.StandardSessionFacade@566e8fce
 
 
 

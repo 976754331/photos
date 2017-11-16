@@ -55,29 +55,33 @@ public class UserServiceImpl  implements IUserService{
 		}
 		if("1".equals(rtnMap.get("flag"))){  //登录成功
 			HttpSession session = request.getSession();
-			//每个账号只允许单个用户登录
-//			ServletContext sc = session.getServletContext();
-//			Object objMap = sc.getAttribute("existMap");
-//			Map<String, String> existMap = new HashMap<String, String>();
-//			if (objMap != null && objMap instanceof Map) {
-//				existMap = (Map<String, String>) objMap;
-//			}
 			String sessionId = session.getId();
 			String userId =  rtnMap.get("userId").toString();
-			//后登录者干掉之前登录者
-//			existMap.put(userId, sessionId);
-//			session.getServletContext().setAttribute("existMap", existMap);
+			//每个账号只允许单个用户登录
+			/**
+			 * 将登陆信息存到ServletContext中			
+			ServletContext sc = session.getServletContext();
+			Object objMap = sc.getAttribute("existMap");
+			Map<String, String> existMap = new HashMap<String, String>();
+			if (objMap != null && objMap instanceof Map) {
+				existMap = (Map<String, String>) objMap;
+			}
+
+			existMap.put(userId, sessionId);
+			session.getServletContext().setAttribute("existMap", existMap);
+			 */
 			
-//			//根据userId查询session信息
-//			Map<String, String> sessionParam = new HashMap<String, String>();
-//			sessionParam.put("userId", userId);
-//			sessionParam.put("sessionId", sessionId);
-//			Map<String, Object> resMap = userMapper.selectSession(sessionParam);
-//			if(resMap == null){  //无session信息新增
-//				userMapper.insertSession(sessionParam);
-//			}else{  //有则更新
-//				userMapper.updateSession(sessionParam);
-//			}			
+			//后登录者干掉之前登录者  将登陆信息存到数据库中
+			//根据userId查询session信息
+			Map<String, String> sessionParam = new HashMap<String, String>();
+			sessionParam.put("userId", userId);
+			sessionParam.put("sessionId", sessionId);
+			Map<String, Object> resMap = userMapper.selectSession(sessionParam);
+			if(resMap == null){  //无session信息新增
+				userMapper.insertSession(sessionParam);
+			}else{  //有则更新
+				userMapper.updateSession(sessionParam);
+			}			
 			session.setAttribute("userId", userId);
 			rtnMap.put("sessionId", sessionId);
 		}
