@@ -45,7 +45,10 @@ public class SessionInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		response.addHeader("Access-Control-Allow-Origin", "*");
+		return true;
 		// TODO Auto-generated method stub
+		/*
+		//暂时去掉过滤器，方便开发
 		String requestUri = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String url = requestUri.substring(contextPath.length());
@@ -53,6 +56,12 @@ public class SessionInterceptor implements HandlerInterceptor {
 			return true;
 		}
 		HttpSession session = request.getSession();
+		if(session == null){
+			return false;
+		}
+		if(session.getAttribute("userId") == null){
+			return false;
+		}
 		String userId = session.getAttribute("userId").toString();
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("userId", userId);
@@ -69,6 +78,8 @@ public class SessionInterceptor implements HandlerInterceptor {
 		}
 		
 		return true;
+		*/
+		
 		/**
 		 * 与ServletContext中的数据做比较
 		ServletContext context = request.getSession().getServletContext();

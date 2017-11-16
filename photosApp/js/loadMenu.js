@@ -1,7 +1,12 @@
 //页面加载完事件
 $(function() {
+	
+	
+	
+	
 	//创建一级分类	
 	document.getElementById("addFirstType").onclick = function() {
+		var liHtml = "";
 		var firstType = prompt("请输入分类名称");
 		if(firstType == "") {
 			alert("请输入正确的分类名称");
@@ -9,9 +14,18 @@ $(function() {
 			if(firstType == null) {		
 				//点击取消
 			} else {
-				var params = {dirPath:diskPath,userId:localStorage.getItem('userid'),}
-				
-				
+				var params = {typeName:firstType}
+				simpAjax(Url + "/type/insertFirst.do", params, function(result) {
+					if(result.rtn_code == 0) {
+						liHtml = createFirstType(firstType, result.data.typeId);
+						$("#mainUl").append(liHtml);
+						liHtml = "";
+						mui.toast("创建成功");
+						
+					} else {
+						mui.toast(result.data.msg);
+					}
+				})				
 			}
 		}
 		
@@ -58,8 +72,7 @@ function loadSecondMenu(dataid, menuDiv) {
 			menuDiv.empty();
 			var menu = result.data;
 			for(var i = 0; i < menu.length; i++) {
-				var classBtn = classArr[parseInt(Math.random() * 6 + 1)];
-				btnHtml = '<li data-id=' + menu[i].type_id + ' class="mui-control-item"><button class=' + classBtn + '>' + menu[i].type_name + '</button></li>';
+				btnHtml = createSecondType(menu[i].type_name, menu[i].type_id)
 				menuDiv.append(btnHtml);
 				btnHtml = "";
 			}
@@ -97,16 +110,8 @@ function loadMenu() {
 			var liHtml = "";
 			var aHtml = "";
 			for(var i = 0; i < menu.length; i++) {
-				liHtml += '<li class="mui-table-view-cell mui-collapse" data-id=' + menu[i].type_id + ' >'
-				liHtml += '<a class="mui-navigate-right">' + menu[i].type_name + '</a>'
-				liHtml += '<div class="mui-collapse-content">'
-				liHtml += '<div class="mui-scroll-wrapper  mui-segmented-control mui-slider-indicator mui-segmented-control-inverted" >'
-				liHtml += '<ul class="mui-scroll" >'
-
-				liHtml += '</ul>'
-				liHtml += '</div>'
-				liHtml += '</div>'
-				liHtml += '</li>'
+				
+				liHtml = createFirstType(menu[i].type_name, menu[i].type_id);
 				$("#mainUl").append(liHtml);
 				liHtml = "";
 			}
@@ -115,23 +120,68 @@ function loadMenu() {
 		}
 	})
 
-	/*
 	
-	$.getJSON("../../js/json/loadUrl.json", function(data) {
+}
 
-		mui(".mui-scroll").on('tap', '.mui-control-item', function() {
-			//获取id
-			var id = this.getAttribute("id");
-			var strs = id.split("666");
-			var strI = strs[1];
-			var strJ = strs[2];
-			var btnB = data.data.menu[strI];
-			var btnUrl = data.data[btnB][strJ];
-			mui.openWindow({
-				id: 'detail',
-				url: btnUrl
-			});
-		})
-	})
-	*/
+//创建二级分类
+function createSecond(obj){
+	event.stopImmediatePropagation()
+	var parentId = $(obj).parent().attr("data-id");
+	var secondType = prompt("请输入分类名称");
+		if(secondType == "") {
+			alert("请输入正确的分类名称");
+		}else{
+			if(secondType == null) {		
+				//点击取消
+			} else {
+				var params = {parentId:parentId,typeName:secondType}
+				simpAjax(Url + "/type/insertSecond.do", params, function(result) {
+					if(result.rtn_code == 0) {
+						btnHtml = createSecondType(secondType, result.data.typeId)
+						$(obj).parent().append(btnHtml);
+						btnHtml = "";
+						mui.toast("创建成功");	
+						window.location.reload();
+					} else {
+						mui.toast(result.data.msg);
+					}
+				})				
+			}
+		}
+		
+	
+}
+
+//创建一级分类标签
+function createFirstType(typeName, typeId){
+	var liHtml = "";
+	liHtml += '<li class="mui-table-view-cell mui-collapse" style="position:relative;" data-id=' + typeId + ' >'
+	liHtml += '<a style = "display: inline;">' + typeName + '</a>'
+	liHtml += '	<span style="position:absolute; left:16.5rem;" onclick="createSecond(this)" > '
+	liHtml += '	<img  src="../../images/icon/addType.jpg" style="width: 1.6rem;height:1.6rem;position:absolute; margin-top:-0.2rem;margin-left:0.5rem;"/> '
+	liHtml += '	</span>'
+	liHtml += '	<span style="position:absolute; left:18.5rem; " class = "firstDelete"> '
+	liHtml += '	<img  src="../../images/icon/delete.png" style="width: 1.4rem;height:1.3rem;position:absolute; margin-top:-0.0rem;margin-left:0.5rem;"/> '
+	liHtml += '	</span>'
+	liHtml += '<div class="mui-collapse-content">'
+	liHtml += '<div class="mui-scroll-wrapper  mui-segmented-control mui-slider-indicator mui-segmented-control-inverted" >'
+	liHtml += '<ul class="mui-scroll" >'
+
+	liHtml += '</ul>'
+	liHtml += '</div>'
+	liHtml += '</div>'
+	liHtml += '</li>'
+	return liHtml;
+}
+
+var classArr = ["mui-button-row", "mui-btn-green", "mui-btn-blue", "mui-btn-danger", "mui-btn-grey", "mui-btn-yellow", ];
+//创建二级分类按钮
+function createSecondType(typeName, typeId){
+	var classBtn = classArr[parseInt(Math.random() * 6 + 1)];
+	var btnHtml = "";
+	btnHtml = '<li data-id=' + typeId + ' class="mui-control-item" style="position: relative; top:-0.6rem;height: 2rem;"><button style="height: 100%;" class=' + classBtn + '>' + typeName 
+	btnHtml += '<span style = "padding:0; margin:0" class = "secondDelete"> '
+	btnHtml += '<img  src="../../images/icon/delete.png" style="width: 1.1rem;height:1.0rem;padding-top:0.3rem"/> '
+	btnHtml += '</span></button></li>';
+	return btnHtml;
 }

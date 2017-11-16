@@ -69,24 +69,33 @@
 		</div>
 		<div style="margin-top: 3rem;">
 			<div style="margin-bottom: 1rem;">
-				<h4> 分类展示区  <span id="addFirstType"><img  src="../../images/icon/addFirstType.jpg"  style="width: 1.6rem;height:1.6rem;position:absolute; margin-top:-0.2rem;margin-left:0.5rem;"/></span> </h4>
+				<h4> 分类展示区  <span id="addFirstType"><img  src="../../images/icon/addType.jpg"  style="width: 1.6rem;height:1.6rem;position:absolute; margin-top:-0.2rem;margin-left:0.5rem;"/></span> </h4>
 				 <button type="button" id="diskBtn" style="font-size: 0.9rem;position:absolute; margin-top:-2.1rem;margin-left:13.5rem;" >点我上传本地文件</button>
 			</div>
 			<div style="overflow:auto">
 				<ul class="mui-table-view" id="mainUl">
 					
+                	
+                  
+                   	
                     <!--
                     	
-                   
-					<li class="mui-table-view-cell mui-collapse">
-						<a class="mui-navigate-right">人物</a>
+                    
+					<li class="mui-table-view-cell mui-collapse" style="position:relative;">
+						<a  style = "display: inline;">人物</a>
+						<span style="position:absolute; margin-left:15.5rem; "> 
+							<img  src="../../images/icon/addType.jpg"  style="width: 1.6rem;height:1.6rem;position:absolute; margin-top:-0.2rem;margin-left:0.5rem;"/> 
+						</span>
+						<span style="position:absolute; margin-left:17.5rem; "> 
+							<img  src="../../images/icon/delete.jpg" style="width: 1.5rem;height:1.3rem;position:absolute; margin-top:-0.0rem;margin-left:0.5rem;"/> 
+						</span>
 						<div class="mui-collapse-content">
 							<div class="mui-scroll-wrapper  mui-segmented-control mui-slider-indicator mui-segmented-control-inverted" >
 								
                                 	
                                 
 								<ul class="mui-scroll" id="scrollDiv">
-									<li id="btn101" class="mui-control-item"><button class="mui-button-row">男星</button></li>
+									<li id="btn101" class="mui-control-item" style="position: relative; top:-1.3rem;height: 2rem;"><button class="mui-button-row" style="height: 100%;">男星</button></li>
 									<li id="btn102" class="mui-control-item"><button class="mui-btn-green">女星</button></li>
 									<li id="btn103" class="mui-control-item"><button class="mui-btn-blue">头像</button></li>
 									<li id="btn104" class="mui-control-item"><button class="mui-btn-danger">风景</button></li>
@@ -118,7 +127,12 @@
 	   			    mui('.mui-scroll-wrapper').scroll({
 	   			    	deceleration: 0.0009 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
 	   			    });
-				})
+				});
+				
+				
+				
+				
+				
 				
 			})
 			

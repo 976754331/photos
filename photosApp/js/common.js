@@ -114,3 +114,4 @@ function isSpecialStr(str){
 	var pattern = new RegExp("[ `~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]");
 	return pattern.test(str);
 }
+
