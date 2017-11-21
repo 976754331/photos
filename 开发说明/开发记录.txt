@@ -1,6 +1,20 @@
+功能设计
+//创建导入数据记录表，一个人不能多次导入同一个本地磁盘
+//首页创建按钮  --导入磁盘数据
+//个性化设计个人的分类不同分类表加userId
+//首页创建按钮  --创建分类
+//一级分类上创建按钮  --创建二级分类
+删除二级类型
+删除一级类型
+
+新增评论和上传功能
+可以自由设置分类
+
+
 我的接口：
 登录接口：验证账号密码
 http://localhost:8080/bookcity/user/login.do?loginName=root&password=123456
+http://10.50.30.141:8080/bookcity/user/login.do?loginName=root&password=123456
 {"rtn_code":0,"data":{"msg":"用户名错误","flag":"0"}}
 {"rtn_code":0,"data":{"msg":"密码正确","flag":"1"}}
 
@@ -24,31 +38,15 @@ http://127.0.0.1:8080/bookcity/file/downPic.do?attId=1
 往数据库中写入本地文件的数据
 http://127.0.0.1:8080/bookcity/file/insertPic.do?dirPath=F:/test
 
-//问题
-1.如何读取图片并分类
-2.一级分类和二级分类  //设置死的二级分类
-建立读取页面，使用户自行设置分类
-
-//
-//创建导入数据记录表，一个人不能多次导入同一个本地磁盘
-//首页创建按钮  --导入磁盘数据
-个性化设计个人的分类不同分类表加userId
-首页创建按钮  --创建分类
-一级分类上创建按钮  --创建二级分类
-新增评论和上传功能
-可以自由设置分类
-
 插入一级类型
 http://localhost:8080/bookcity/type/insertFirst.do
 
 插入二级类型
 http://localhost:8080/bookcity/type/insertSecond.do
 
+删除一级类型
+http://localhost:8080/bookcity/type/deleteFirst.do?typeId=1
 
-login: org.apache.catalina.session.StandardSessionFacade@72b5a258
-join: org.apache.catalina.session.StandardSessionFacade@566e8fce
-
-
-
-
+删除二级类型
+http://localhost:8080/bookcity/type/deleteSecond.do?typeId=e36a41add2d14c41b0be7ef5e39f3bed
 

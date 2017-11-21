@@ -4,6 +4,36 @@ import java.util.List;
 import java.util.Map;
 
 public interface TypeMapper{
+		  
+	  /**
+	   * 删除分类-删除tb_pic_type表数据
+	   * @return
+	   */
+	 public void deletePicType(Map<String, String> params);
+	    
+	  /**
+	   * 删除分类-删除tb_types表数据
+	   * @return
+	   */
+	 public void deleteTypes(Map<String, String> params);
+	  
+	 /**
+	   * 删除分类-删除tb_pic表数据
+	   * @return
+	   */
+	 public void deletePic(Map<String, String> params);
+	  
+	 /**
+	   * 删除分类-删除tb_attachment表数据
+	   * @return
+	   */
+	 public void deleteAttachment(Map<String, String> params);
+	  
+	 /**
+	   * 删除分类-删除tb_comment表数据
+	   * @return
+	   */
+	 public void deleteComment(Map<String, String> params);
 
 	  /**
 	   * 查询一级分类
@@ -15,7 +45,7 @@ public interface TypeMapper{
 	   * 查询二级分类
 	   * @return
 	   */
-	 public List<Map<String, Object>> selectSecondType(Map<String, String> params);
+	 public List<Map<String, String>> selectSecondType(Map<String, String> params);
 	 
 	  /**
 	   * 读取本地文件时插入新的文件夹分类

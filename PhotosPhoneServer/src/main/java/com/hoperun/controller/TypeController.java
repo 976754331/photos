@@ -34,6 +34,55 @@ public class TypeController{
 	private ITypeService typeService;
 	
 	/**
+	 * 删除二级分类
+	 * @param params
+	 * @return
+	 */
+	@RequestMapping(value = "deleteSecond")
+	@ResponseBody
+	public ReturnInfo deleteSecondTypes(HttpServletRequest request,String typeId) {
+		ReturnInfo rtn = new ReturnInfo();
+		Map<String,String> params = new HashMap<String, String>();
+		String userId = UserUtil.getUserId(request);
+		params.put("userId", userId);
+		params.put("type_id", typeId);
+		try {
+			typeService.deleteSecondTypes(params);
+			rtn.setMsg("删除成功");
+		} catch (ServiceException e) {
+			ReturnInfo errRtn = new ReturnInfo();
+			errRtn.setRtnCode(888);
+			errRtn.setMsg("sql异常，执行操作失败");
+		}
+		return rtn;
+	}
+	
+	/**
+	 * 删除一级分类
+	 * @param params
+	 * @return
+	 */
+	@RequestMapping(value = "deleteFirst")
+	@ResponseBody
+	public ReturnInfo deleteFirstTypes(HttpServletRequest request,String typeId) {
+		ReturnInfo rtn = new ReturnInfo();
+		Map<String,String> params = new HashMap<String, String>();
+		String userId = UserUtil.getUserId(request);
+		params.put("userId", userId);
+		params.put("parentId", typeId);
+		try {
+			typeService.deleteFirstTypes(params);
+			rtn.setMsg("删除成功");
+		} catch (ServiceException e) {
+			ReturnInfo errRtn = new ReturnInfo();
+			errRtn.setRtnCode(888);
+			errRtn.setMsg("sql异常，执行操作失败");
+		}
+		return rtn;
+	}
+	
+	
+	/**
 	 * 获取一级类型
 	 * @param params
 	 * @return
@@ -66,7 +115,7 @@ public class TypeController{
 	@ResponseBody
 	public ReturnInfo secondType(HttpServletRequest request, String parentId) {
 		ReturnInfo rtn = new ReturnInfo();
-		List<Map<String,Object>> rtnList = new ArrayList<Map<String,Object>>();
+		List<Map<String,String>> rtnList = new ArrayList<Map<String,String>>();
 		Map<String,String> params = new HashMap<String, String>();
 		String userId = UserUtil.getUserId(request);
 		params.put("parentId", parentId);

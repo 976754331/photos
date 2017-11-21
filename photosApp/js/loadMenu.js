@@ -59,6 +59,8 @@ $(function() {
 
 })
 
+/* -------------------------------------------------------页面加载事件------------------------------------------------------*/
+
 //加载二级分类
 function loadSecondMenu(dataid, menuDiv) {
 	var params = {
@@ -123,6 +125,12 @@ function loadMenu() {
 	
 }
 
+//删除二级分类
+function deleteSecond(obj){
+	event.stopImmediatePropagation()
+	alert(test);
+}
+
 //创建二级分类
 function createSecond(obj){
 	event.stopImmediatePropagation()
@@ -160,7 +168,7 @@ function createFirstType(typeName, typeId){
 	liHtml += '	<span style="position:absolute; left:16.5rem;" onclick="createSecond(this)" > '
 	liHtml += '	<img  src="../../images/icon/addType.jpg" style="width: 1.6rem;height:1.6rem;position:absolute; margin-top:-0.2rem;margin-left:0.5rem;"/> '
 	liHtml += '	</span>'
-	liHtml += '	<span style="position:absolute; left:18.5rem; " class = "firstDelete"> '
+	liHtml += '	<span style="position:absolute; left:18.5rem; " onclick="deleteFirst(this)"> '
 	liHtml += '	<img  src="../../images/icon/delete.png" style="width: 1.4rem;height:1.3rem;position:absolute; margin-top:-0.0rem;margin-left:0.5rem;"/> '
 	liHtml += '	</span>'
 	liHtml += '<div class="mui-collapse-content">'
@@ -180,8 +188,8 @@ function createSecondType(typeName, typeId){
 	var classBtn = classArr[parseInt(Math.random() * 6 + 1)];
 	var btnHtml = "";
 	btnHtml = '<li data-id=' + typeId + ' class="mui-control-item" style="position: relative; top:-0.6rem;height: 2rem;"><button style="height: 100%;" class=' + classBtn + '>' + typeName 
-	btnHtml += '<span style = "padding:0; margin:0" class = "secondDelete"> '
-	btnHtml += '<img  src="../../images/icon/delete.png" style="width: 1.1rem;height:1.0rem;padding-top:0.3rem"/> '
+	btnHtml += '<span style = "padding:0; margin:0" class = "secondDelete" onclick="deleteSecond(this)"> '
+	btnHtml += '<img  src="../../images/icon/delete.png" style="width: 1.1rem;height:1.0rem;padding-top:0.3rem" /> '
 	btnHtml += '</span></button></li>';
 	return btnHtml;
 }
