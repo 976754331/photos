@@ -74,14 +74,8 @@
 			</div>
 			<div style="overflow:auto">
 				<ul class="mui-table-view" id="mainUl">
-					
-                	
-                  
-                   	
-                    <!--
-                    	
-                    
-					<li class="mui-table-view-cell mui-collapse" style="position:relative;">
+                   <!--
+ 					<li class="mui-table-view-cell mui-collapse" style="position:relative;">
 						<a  style = "display: inline;">人物</a>
 						<span style="position:absolute; margin-left:15.5rem; "> 
 							<img  src="../../images/icon/addType.jpg"  style="width: 1.6rem;height:1.6rem;position:absolute; margin-top:-0.2rem;margin-left:0.5rem;"/> 
@@ -111,9 +105,23 @@
 				</ul>
 			</div>
 		</div>
+		
+		<div>
+			<div style="margin-bottom: 1rem;">
+				<a style="margin-bottom: 1rem;" href="../person/sharePicture.html"><h4> 图片分享区 </h4></a>
+				<span>如果不匹配则向上查找父元素,一层一层往上,直到找到匹配选择器的元素。如果什么都没找到则返回一个空的jQuery对象。 closest和parents的主要区别是</span>
+			</div>
+			
+		</div>
 
 		<script type="text/javascript">
-			mui.init();
+			mui.init({
+			  gestureConfig:{
+			   tap: true, //默认为true
+			   doubletap: true, //默认为false
+			   longtap: true //默认为false		
+			  }
+			});
 			
 			mui.ready(function() {
 				//加载主菜单
@@ -122,6 +130,7 @@
 				//加载二级菜单
 				mui('.mui-table-view').on('tap', '.mui-table-view-cell', function() {
 	   				var dataid = $(this).attr("data-id");
+	   				//alert(dataid);
 	   				var menuDiv = $(this).children().children().children();
 	   			    loadSecondMenu(dataid,menuDiv);
 	   			    mui('.mui-scroll-wrapper').scroll({
@@ -129,10 +138,10 @@
 	   			    });
 				});
 				
-				
-				
-				
-				
+				//非管理员用户屏蔽上传文件菜单
+				if(localStorage.getItem('userType')!=1){
+					$("#diskBtn").hide();
+				}
 				
 			})
 			

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hoperun.exception.ServiceException;
 import com.hoperun.model.vo.ReturnInfo;
 import com.hoperun.service.IFileService;
+import com.hoperun.util.PropsUtil;
+import com.hoperun.util.UserUtil;
 
 @Controller
 @RequestMapping("/file")
@@ -43,7 +45,7 @@ public class FileController {
 	 */
 	@RequestMapping(value="/insertPic")
 	@ResponseBody
-	public ReturnInfo insertPic(HttpServletRequest req, String dirPath, String userId) throws Exception{
+	public ReturnInfo insertPic(HttpServletRequest req, String dirPath, String userId){
 		ReturnInfo rtn = new ReturnInfo();
 		try {
 			Map<String,String> rtnMap = fileService.insertPic(dirPath, userId);
@@ -54,6 +56,18 @@ public class FileController {
 			errRtn.setMsg("sql异常，执行操作失败");
 		}
 		return rtn;
+	}
+	
+	/**
+	 * 上传图片
+	 */
+	@RequestMapping(value="/uploadPic")
+	@ResponseBody
+	public ReturnInfo uploadPic(HttpServletRequest req, String dirPath){
+		String userId = UserUtil.getUserId(req);
+		String path = PropsUtil.get("imgUrl");
+	
+		return null;
 	}
 	
 }

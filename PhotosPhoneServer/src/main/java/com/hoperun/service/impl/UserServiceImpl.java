@@ -83,6 +83,7 @@ public class UserServiceImpl  implements IUserService{
 				userMapper.updateSession(sessionParam);
 			}			
 			session.setAttribute("userId", userId);
+			rtnMap.put("userType", resultMap.get("user_type").toString());
 			rtnMap.put("sessionId", sessionId);
 		}
 		return rtnMap;

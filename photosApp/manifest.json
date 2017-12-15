@@ -219,7 +219,19 @@
 					"images/icon/addFirstType.jpg",
 					"js/common.js",
 					"css/mui.min.css",
-					"js/jquery-1.10.2.min.js"
+					"js/jquery-1.10.2.min.js",
+					"images/icon/addType.jpg",
+					"images/icon/delete.png"
+				],
+				"refer": [
+					"html/person/picture.html"
+				],
+				"priority": 0
+			},
+			"html/person/picture.html": {
+				"resources": [
+					"js/loadImage.js",
+					"fonts/mui.ttf"
 				],
 				"refer": [],
 				"priority": 0
@@ -229,7 +241,6 @@
 			"resources": [
 				"images/my/my001001.jpg",
 				"js/json/timeAddr.json",
-				"js/loadImage.js",
 				"js/json/loadMenu.json",
 				"images/my/my001002.jpg",
 				"html/person/my.html",

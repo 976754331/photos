@@ -9,6 +9,7 @@ function opneNew(url) {
 				localStorage.clear();				
 				localStorage.setItem('userid', result.data.userId);
 				localStorage.setItem('username', result.data.name);
+				localStorage.setItem('userType', result.data.userType);
 				localStorage.setItem('sessionId', ";jsessionid="+result.data.sessionId);
 				//console.log(localStorage.getItem("userid"));				
 				mui.openWindow(url);

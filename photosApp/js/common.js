@@ -2,7 +2,7 @@
 var defaultImg = '/images/zw.png';
 
 //加载图片根路径
-var picSrc = "http://10.50.30.141:8080/bookcity/file/downPic.do?attId="
+var picSrc = "http://10.50.30.141:8088/bookcity/file/downPic.do?attId="
 
 
 //是否debug调试
@@ -30,7 +30,7 @@ function GetQueryString(key){
 //定义ajax URL
 //var Url = "http://10.50.30.201:9001/bookcity";
 //var Url = "http://192.168.0.104:8080/bookcity";
-var Url = "http://10.50.30.141:8080/bookcity";
+var Url = "http://10.50.30.141:8088/bookcity";
 
 //封装通用AJAX方法
 function simpAjax(url, data, successCallBack, errorCallBack, async) {
