@@ -27,5 +27,17 @@ public interface FileMapper{
 	   * @return
 	   */
 	 public void insertDiskRecord(Map<String, String> params);
+	 
+	  /**
+	   * 查询上传图片记录表
+	   * @return
+	   */
+	 public Map<String, Object> selectUploadRecord(Map<String, String> params);
+	 
+	 /**
+	   * 往上传记录表中插入数据
+	   * @return
+	   */
+	 public void insertUploadRecord(Map<String, String> params);
 
 }

@@ -41,6 +41,7 @@ http://localhost:8080/bookcity/picture/list.do?typeId=101
 
 加载图片接口
 http://127.0.0.1:8080/bookcity/file/downPic.do?attId=1
+http://127.0.0.1:8088/bookcity/file/uploadPic.do
 
 往数据库中写入本地文件的数据
 http://127.0.0.1:8080/bookcity/file/insertPic.do?dirPath=F:/test
@@ -56,4 +57,7 @@ http://localhost:8080/bookcity/type/deleteFirst.do?typeId=1
 
 删除二级类型
 http://localhost:8080/bookcity/type/deleteSecond.do?typeId=e36a41add2d14c41b0be7ef5e39f3bed
+
+上传图片
+http://localhost:8080/bookcity/file/uplodePic.do
 

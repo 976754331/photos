@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/jquery-1.10.2.min.js"></script>
+		<script src="../../js/common.js"></script>
+		<script src="../../js/login.js"></script>
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<style>
+			
+			
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content" align="center" style="margin-top:5rem;margin-bottom: 2rem;">
+			<span style="color: red;font-size: 2.62rem;"><b>相册</b></span>
+		</div>
+		<br />
+	
+		<div style="margin:2rem 2rem">
+			<span style="float:right"><img src="images/fengjing/tx001007.jpg" style="height: 5rem;width: 4.8rem;"/></span>
+			<span style="margin: 0.3rem 0rem;font-size:1.21rem;display: block;"><b>相册：人生的脚印，记录我的生活轨迹！！！</b></span>
+
+		</div>
+		
+		<div id="inputLists" style="margin-top: 6rem;">
+			<ul style="list-style-type: none;width:90%">
+				<li>
+					<input id="accountInput" type="text" class="mui-input" placeholder="账号" value="root"/>
+				</li>
+				<li>
+					<input id="pwdInput" type="text" class="mui-input-password" placeholder="密码" value="123456"/>
+				</li>
+			</ul>
+		</div>
+		<div align="center">
+			<button id="affirmBtn" class="mui-btn-success" type="button" style="width: 80%;height: 2.6rem;">登录</button>
+		</div>
+
+		<script>
+			
+			mui.init();
+			var affirmBtn = document.getElementById("affirmBtn");
+			var accountInput = document.getElementById("accountInput");
+			var pwdInput = document.getElementById("pwdInput");
+			affirmBtn.addEventListener("tap", function(){opneNew("mainPortal.html")});
+			
+		</script>
+	</body>
+
+</html>

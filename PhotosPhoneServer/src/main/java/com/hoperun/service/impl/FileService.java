@@ -187,4 +187,57 @@ public class FileService implements IFileService {
 		return rtnMap;
 	}
 
+	/**
+	 * 上传图片
+	 * userId  用户id
+	 * fileImgUrl  上传文件名称+路径
+	 * typeId  二级类型id
+	 * imgPath  手机保存图片路径
+	 */
+	public void uploadPic(String userId, String fileImgUrl, String typeId, String imgPath)throws Exception{
+		//先判断是否上传过，上传过则不再上传
+		Map<String, String> paramPic = new HashMap<String, String>();
+		paramPic.put("imgPath", imgPath);
+		paramPic.put("userId", userId);
+		paramPic.put("typeId", typeId);
+		Map<String, Object> result = fileMapper.selectUploadRecord(paramPic);
+		if(result.get("count") != null && Integer.parseInt(result.get("count").toString()) == 1){ //已插入则不让操作并提示上次操作时间
+			throw new RuntimeException("你已上传此图片，上传时间为： "+ result.get("uplode_date"));
+		}
+		
+		String dirPath = fileImgUrl.substring(0, fileImgUrl.lastIndexOf("/")+1);
+		String fileName = fileImgUrl.substring(fileImgUrl.lastIndexOf("/")+1, fileImgUrl.length());
+		
+		String attId = UUID.randomUUID().toString().replaceAll("-", "");
+		// 往附件表中插数据
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("picPath", dirPath);
+		params.put("picName", fileName);
+		params.put("attId", attId);
+		fileMapper.inserPic(params);
+		// 往图片表中加数据
+		
+		// values(#{picId},#{picName},#{attId},#{shootDate},#{uploadDate})
+		String picId = UUID.randomUUID().toString().replaceAll("-", "");
+		String recordId = UUID.randomUUID().toString().replaceAll("-", "");
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		File target = new File(fileImgUrl);
+		Long time = target.lastModified();
+		String shootDate = df.format(new Date(time));
+		String uploadDate = df.format(new Date());
+		paramPic.put("picId", picId);
+		paramPic.put("picName", fileName);
+		paramPic.put("attId", attId);
+		paramPic.put("shootDate", shootDate);
+		paramPic.put("uploadDate", uploadDate);		
+		paramPic.put("recordId", recordId);
+		
+		pictureMapper.insertPicFromDisk(paramPic);
+
+		//未上传则加入一条上传记录
+		fileMapper.insertUploadRecord(paramPic);
+		
+		// 往分类表中插入数据
+		typeMapper.insertTypesFromDisk(paramPic);
+	}
 }

@@ -21,4 +21,16 @@
     insert into tb_disk_record values(#{recordId},#{userId},#{filePath},#{uplodeDate})
   </insert>
   
+  <!-- 查询上传图片记录表 -->
+  <select id="selectUploadRecord" parameterType="map" resultType="map">
+  	SELECT count(1) as count,uplode_date FROM tb_uplode_record where user_id =#{userId} and pic_name = #{imgPath}
+  	and type_id = #{typeId}
+  </select>
+  
+   <!-- 往上传记录表中插入数据 -->
+  <insert id="insertUploadRecord" parameterType="map">
+    INSERT INTO tb_uplode_record 
+    VALUES (#{recordId}, #{imgPath}, #{userId}, #{uploadDate}, #{typeId})
+  </insert>
+  
 </mapper>
